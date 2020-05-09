@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import App from './App.vue';
 import GoogleSignInButton from 'vue-google-signin-button-directive'
+import VueYouTubeEmbed from 'vue-youtube-embed'
+import Toasted from 'vue-toasted'
+Vue.use(Toasted)
+Vue.use(VueYouTubeEmbed)
 // var firebaseConfig = {
 //   apiKey: "AIzaSyCqrOOmVd_ew7uroS93pcEe2m6e6brcrUg",
 //   authDomain: "g-kan-ban.firebaseapp.com",

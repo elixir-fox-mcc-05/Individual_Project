@@ -145,7 +145,7 @@ class Controller{
         })
 
     }
-    static viewall(req,res){        
+    static viewrandom(req,res){        
         axios({
             method: 'GET',
             url: 'https://www.themealdb.com/api/json/v1/1/random.php'

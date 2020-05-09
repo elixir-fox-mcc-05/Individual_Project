@@ -1,10 +1,10 @@
 const {User} = require("../models")
 const{generateToken} = require("../helpers/jwt")
+const {Decrypt} = require("../helpers/bcrypt")
 const axios = require("axios")
 class Controller{
     static register(req,res){
         let Data={
-            username:req.body.username,
             email:req.body.email,
             password:req.body.password
         }
@@ -13,14 +13,14 @@ class Controller{
         .then(result=>{
             let payload={
                 id:result.id,
-                username:result.username
+                email:result.email
             }
             let token = generateToken(payload)
             res.status(200).json({
                 msg:" Success add user",
                 id:result.id,
                 token:token,
-                username:result.username
+                email:result.email
             })
         })
         .catch(err=>{
@@ -31,16 +31,15 @@ class Controller{
         })
     }
     static loginGmail(req,res){       
-        
         let Data = {
-            username:req.currentGmailId,
+            email:req.currentGmailId,
             password:process.env.SECRET_PASS
         }
-        console.log('>>>>>>>>',Data);
+      
         
         User.findOne({
             where:{
-                username: Data.username
+                email: Data.email
             }
         })
         .then(result=>{
@@ -51,7 +50,7 @@ class Controller{
             if(compare){
                 let payload={
                     id:result.id,
-                    username:result.username
+                    email:result.email
                 }
                 
                 let token = generateToken(payload)
@@ -59,19 +58,19 @@ class Controller{
                     
                     id:result.id,
                     token:token,
-                    username:result.username
+                    email:result.email
                 })
                 
             }
             else{
                 res.status(401).json({
-                    msg:"username/password not found"
+                    msg:"email/password not found"
                 })
             }
         })
         .catch(err=>{
+            
             let Data={
-                username:req.currentGmailId,
                 email:req.currentGmailId,
                 password:process.env.SECRET_PASS
             }            
@@ -79,17 +78,19 @@ class Controller{
             .then(result=>{
                 let payload={
                     id:result.id,
-                    username:result.username
+                    email:result.email
                 }
                 let token = generateToken(payload)
                 res.status(200).json({
                     msg:" Success add user",
                     id:result.id,
                     token:token,
-                    username:result.email
+                    email:result.email
                 })
             })
             .catch(err=>{
+                console.log(err);
+                
                 res.status(400).json({
                     msg:"add user fail",
                     error:err
@@ -102,13 +103,14 @@ class Controller{
 
     static login(req,res){
         let Data = {
-            username:req.body.username,
+            email:req.body.email,
             password:req.body.password
         }
+        console.log('>>>>>>>>',Data);
 
         User.findOne({
             where:{
-                username: Data.username
+                email: Data.email
             }
         })
         .then(result=>{
@@ -119,26 +121,26 @@ class Controller{
             if(compare){
                 let payload={
                     id:result.id,
-                    username:result.username
+                    email:result.email
                 }
                 
                 let token = generateToken(payload)
                 res.status(200).json({                    
                     id:result.id,
                     token:token,
-                    username:result.username
+                    email:result.email
                 })
                 
             }
             else{
                 res.status(401).json({
-                    msg:"username/password not found"
+                    msg:"email/password not found"
                 })
             }
         })
         .catch(err=>{
             res.status(401).json({
-                msg:"username/password not found"
+                msg:"email/password not found"
             })
         })
 

@@ -4,16 +4,6 @@ module.exports = (sequelize, DataTypes) => {
  class User extends sequelize.Sequelize.Model{}
 
  User.init({
-  username:{
-    type : DataTypes.STRING,
-    allowNull:false,
-    validate:{
-      notEmpty:{
-        args:false,
-        msg:"Username is require"
-      }
-    }
-  }, 
   email:{
     type : DataTypes.STRING,
     allowNull:false,

@@ -4,14 +4,15 @@ const app = express()
 const cors = require('cors')
 const PORT = 3000
 const controllerUser = require('./controllers/user')
+const googleverify = require('./middlewares/googleVerify')
 
 app.use(cors())
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 app.get('/',controllerUser.viewall)
-app.get('/register',controllerUser.register)
-app.get('/login',controllerUser.login)
-app.get('/gmaillogin',controllerUser.loginGmail)
+app.post('/register',controllerUser.register)
+app.post('/login',controllerUser.login)
+app.post('/gmaillogin',googleverify,controllerUser.loginGmail)
 
 
 

@@ -16,10 +16,9 @@ class Corona {
   }
 
   static getCountry(req, res, next) {
-    let country = req.params.country
     axios({
         method: 'GET',
-        url: 'https://covid19.mathdro.id/api/countries/' + country
+        url: 'https://api.covid19api.com/summary'
       })
       .then(data => {
         let result = data.data

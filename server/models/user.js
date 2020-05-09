@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         len: {
           args: [1, 20],
-          msg: `Name character must be Min 1 and Max 20 characters`
+          msg: `Your Name must be 1-20 characters long`
         }
       }
     }

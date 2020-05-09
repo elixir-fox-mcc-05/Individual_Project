@@ -1,9 +1,5 @@
-# **MUSIC FANS LIBRARY**
-
-get all information about your favorite musician here
-
------
 ## **REST API DOCUMENTATION**
+---------
 
 **INTRODUCTION**
 
@@ -73,7 +69,7 @@ Create user data
                 "message": "Name must be filled"
             },
             {
-                "message": "Name character must be Min 1 and Max 20 characters"
+                "message": "Your Name must be 1-20 characters long"
             },
             {
                 "message": "Email already registered"

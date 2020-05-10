@@ -5,65 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
-    <title>FAround</title>
+    <title>BBF</title>
 </head>
 <body>
-    <div id="App">
-        <!-- LOGIN PAGE -->
-
-        <div id="login" v-if="currentPage == 'login'">
-            <div class="container">
-                <div id="login-row" class="row justify-content-center align-items-center">
-                    <div id="login-column" class="col-md-6">
-                        <div id="login-box" class="col-md-12">
-                            <form id="login-form" class="form" v-on:submit.prevent="login">
-                                <h3 class="text-center text-info">Login</h3>
-                                <div class="form-group">
-                                    <label for="email" class="text-info">Email:</label><br>
-                                    <input type="text" name="email" id="email" class="form-control" v-model="email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="text-info">Password:</label><br>
-                                    <input type="password" name="password" id="password" class="form-control" v-model="password">
-                                </div>
-                                <div class="form-group">
-                                    <label for="remember-me" class="text-info"><span></span><br>
-                                    <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid" v-else-if="currentPage == 'dashboard'">
-            <nav class="navbar navbar-light bg-secondary justify-content-between">
-                <a class="navbar-brand" >Navbar</a>
-                <form class="form-inline" v-on:submit.prevent="logout">
-                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">logout</button>
-                </form>
-            </nav>
-            <h1 id="dashboard-title">15 Padang Restaurant Around MCC</h1>
-            <div class="row">
-                <div class="col-lg-4" v-for="restaurant in restaurants">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-text" id="card-title">{{restaurant.name}}</p>
-                        </div>
-                        <img :src="restaurant.img" :alt="restaurant.name">
-                        <div class="card-body">
-                            <p class="card-text">{{restaurant.address}}</p>
-                            <a :href="restaurant.url">check this restaurant!</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- AXIOS -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <div id="App"></div>
 
     <!-- BOOTSTRAP & JQUERY -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -71,7 +16,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     
     <!-- VUE -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="./main.js"></script>
+    <script src="./src/main.js"></script>
 </body>
 </html>

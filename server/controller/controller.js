@@ -2,6 +2,7 @@ const axios = require('axios')
 const {User} = require('../models')
 const {comparePassword} = require('../helper/bcrypt')
 const {generateToken} = require('../helper/jwt')
+const verificationGoogle = require('../helper/Oauth')
 
 class Controller{
     static login(req, res){
@@ -41,7 +42,7 @@ class Controller{
 
     static aroundMCC(req, res){
         let listRestaurant = []
-        axios.get(`https://developers.zomato.com/api/v2.1/search?count=15&lat=-6.2132172&lon=106.8207167&radius=500&cuisines=235&sort=real_distance`,{
+        axios.get(`https://developers.zomato.com/api/v2.1/search?entity_id=11052&entity_type=city&count=15&cuisines=90&sort=rating`,{
             headers: {
                 "user-key": process.env.API_KEY
             }
@@ -53,7 +54,7 @@ class Controller{
                         name: result[i].restaurant.name,
                         address: result[i].restaurant.location.address,
                         img: result[i].restaurant.featured_image,
-                        url: result[i].restaurant.url
+                        cost: result[i].restaurant.average_cost_for_two
                     }
                     listRestaurant.push(temp)
                 }
@@ -63,10 +64,48 @@ class Controller{
                 })
             })
             .catch(err => {
-                console.log(err)
                 res.status(500).json({
                     msg: 'internal server err'
                 })
+            })
+    }
+
+    static googleLogin(req, res){
+        let {google_token} = req.headers
+        let email = null
+        let newUser= false
+
+        verificationGoogle(google_token)
+            .then(payload => {
+                email = payload.email
+                return User.findOne({where: {email}})
+            })
+            .then(user => {
+                if(user){
+                    return user
+                } else {
+                    newUser = true
+                    return User.create({
+                        email,
+                        password: process.env.DEFAULT_GOOGLE_PASS
+                    })
+                }
+            })
+            .then(user => {
+                let code = newUser ? 201 : 200
+                let { id, email, password } = user
+                let access_token = generateToken({
+                    id,
+                    email,
+                    password
+                })
+
+                res.status(code).json({
+                    access_token
+                })
+            })
+            .catch(err => {
+                next(err)
             })
     }
 }

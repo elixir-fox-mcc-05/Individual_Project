@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-
 body {
     margin: 0;
     padding: 0;
@@ -28,11 +27,6 @@ body {
     margin-top: 25px;
 }
 
-img{
-    max-width:100%;
-    height:auto;
-}
-
 #card-title{
     font-family: 'Pacifico', cursive;
     font-size: 40px;
@@ -41,7 +35,6 @@ img{
 .card{
     width: auto;
     height: 620px;
-    /* background-color: #012c33; */
 }
 
 #dashboard-title{
@@ -51,5 +44,16 @@ img{
 
 .card img{
     width: auto;
-    height: auto;
+    height: 300px;
+    object-fit: cover;
+}
+
+#navbar-title{
+    color: white;
+    font-size: 20px;
+}
+
+#google-login{
+    margin-left: 400px;
+    margin-top: -15px;
 }

@@ -44,7 +44,8 @@ module.exports = (sequelize, DataTypes) => {
         key: "id"
       },
       onDelete: 'cascade',
-      onUpdate: 'cascade'
+      onUpdate: 'cascade',
+      hooks: true
     }
   }, {
     sequelize,

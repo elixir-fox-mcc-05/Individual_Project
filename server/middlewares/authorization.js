@@ -3,12 +3,10 @@ const { User, Team, Player } = require('../models');
 module.exports = {
     authorizeTeamOwner: (req, res, next) => {
         const id = req.params.id ? req.params.id : req.params.team_id;
-        console.log(id);
         Team
             .findByPk(id)
             .then(team => {
                 if(team) {
-                    console.log(team);
                     if (team.UserId === req.userId) {
                         next();
                     } else {

@@ -41,7 +41,7 @@ export default {
     },
     data() {
         return {
-            baseUrl: 'http://localhost:3000',
+            baseUrl: 'https://muvi-adit.herokuapp.com',
             currentPage: 'landingPage',
             moviePopular: {
                 page: 1,

@@ -58,7 +58,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col m4 center valign-wrapper">
-                        <div class="container center">
+                        <div class="container center" id="googleButtonContainer">
+                            <img src="../../img/google.png" id="googleLogoImg">
                             <g-signin-button class="btn" role="button"
                                 :params="googleSignInParams"
                                 @success="onSignInSuccess"
@@ -126,6 +127,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+#googleButtonContainer{
+    padding-top: 30px;
+}
+#googleLogoImg{
+    width: 150px;
+}
 </style>

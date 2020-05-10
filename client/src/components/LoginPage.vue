@@ -29,8 +29,9 @@
                 <!-- register -->
                 </div>
             </div>
+            </div>
         </div>
-      </div>
+        </div>
     </div>
 </template>
 

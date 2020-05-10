@@ -7,7 +7,9 @@
         ></LoginPage>
         <MainPage
             v-if="page == 'mainPage'"
+            @toLoginPageFromMainPage='toLoginPage'
         ></MainPage>
+        <Footer></Footer>
     </div>
 </template>
 
@@ -15,10 +17,11 @@
 import Jumbotron from './components/Jumbotron'
 import LoginPage from './components/LoginPage'
 import MainPage from './components/MainPage'
+import Footer from './components/Footer'
 export default {
     name: 'App',
     components: {
-        Jumbotron, LoginPage, MainPage
+        Jumbotron, LoginPage, MainPage, Footer
     },
     data (){
         return {
@@ -28,6 +31,9 @@ export default {
     methods: {
         toMainPage(){
             this.page = 'mainPage'
+        },
+        toLoginPage(){
+            this.page = 'loginPage'
         }
     },
     created() {
@@ -47,4 +53,5 @@ export default {
         -moz-background-size: cover;
         background-position: center; 
     }
+
 </style>

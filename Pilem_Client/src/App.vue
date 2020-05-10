@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       AppName: "Pilem",
-      serverUrl: "http://server-pilem-yudhaaw96.herokuapp.com",
+      serverUrl: "https://server-pilem-yudhaaw96.herokuapp.com",
       posterPath: "https://image.tmdb.org/t/p/w500",
       posterPathSmall: "https://image.tmdb.org/t/p/w200",
       authenticated: false

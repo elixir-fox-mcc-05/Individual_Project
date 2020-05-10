@@ -43,11 +43,6 @@ export default {
       }
       return false;
     }
-  },
-  computed: {
-    userFav() {
-      this.checkFavorite();
-    }
   }
 };
 </script>

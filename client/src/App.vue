@@ -31,10 +31,17 @@
 </template>
 
 <script>
+import Vue from "vue";
+import { LoaderPlugin } from "vue-google-login";
 import axios from "axios";
 import LoginPage from "./components/LoginPage.vue";
 import RegisterPage from "./components/RegisterPage.vue";
 import DashboardPage from "./components/DashboardPage.vue";
+
+Vue.use(LoaderPlugin, {
+  client_id:
+    "933063756617-e8kgkdk30jqda15abpsqaj1od0d5cbbh.apps.googleusercontent.com"
+});
 
 export default {
   name: "App",
@@ -176,12 +183,17 @@ export default {
         });
     },
     logout() {
-      let auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(() => {
-        this.logged_in = false;
-        localStorage.clear();
-        this.showLogin();
-        this.errorMessage = "";
+      // let auth2 = gapi.auth2.getAuthInstance();
+      // auth2.signOut().then(() => {
+
+      // });
+      Vue.GoogleAuth.then(auth2 => {
+        auth2.signOut().then(() => {
+          this.logged_in = false;
+          localStorage.clear();
+          this.showLogin();
+          this.errorMessage = "";
+        });
       });
     },
     onSignIn(googleUser) {

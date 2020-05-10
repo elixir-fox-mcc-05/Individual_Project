@@ -1,7 +1,7 @@
 <template>
     <div class="navbar">
         <div class="logo">
-            <!-- <img src="../../assets/gridiron.jpg" alt="gridiron ball"> -->
+            <h2 class="title">Gridiron Fantasy</h2>
         </div>
         <div class="button">
             <button class="btn btn-danger" v-if="page === 'main'" @click="$emit('logout')">Logout</button>
@@ -44,5 +44,10 @@ export default {
 
     .btn-blueish:hover {
         background-color: rgb(65, 65, 175);
+    }
+
+    .title {
+        color: #E9ECEF;
+        font-family: 'Oswald', sans-serif;font-family: 'Oswald', sans-serif;
     }
 </style>

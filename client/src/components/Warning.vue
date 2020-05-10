@@ -18,7 +18,7 @@ export default {
     methods: {
         deleteTeam(id) {
             const { access_token } = localStorage;
-            axios.delete(`http://localhost:4000/teams/${id}`, {
+            axios.delete(`https://infinite-caverns-50726.herokuapp.com/teams/${id}`, {
                 headers: {
                     access_token
                 }

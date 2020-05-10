@@ -25,8 +25,6 @@ export default {
             this.$emit('delete', id);
         },
         details(team, name) {
-            console.log(team);
-            console.log(name);
             this.$emit('details', team, name);
         }
     }

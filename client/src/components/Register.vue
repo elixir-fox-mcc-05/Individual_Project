@@ -63,7 +63,7 @@ export default {
     methods: {
         register() {
             console.log('clicked');
-            axios.post('http://localhost:4000/users/register', {
+            axios.post('https://infinite-caverns-50726.herokuapp.com/users/register', {
                 name: this.registrationName,
                 username: this.registrationUsername,
                 email: this.registrationEmail,
@@ -93,7 +93,7 @@ export default {
         },
         onSignInSuccess(googleUser){
             var id_token = googleUser.getAuthResponse().id_token;
-            axios.post('http://localhost:4000/users/google_login', null, {
+            axios.post('https://infinite-caverns-50726.herokuapp.com/users/google_login', null, {
                 headers: {
                     google_token: id_token
                 }
@@ -118,7 +118,16 @@ export default {
                 })
         },
         onSignInError (error) {
-            console.log(error);
+            this.errorDetected = true;
+            if(Array.isArray(err.response.data.error)) {
+                let errors = '';
+                err.response.data.error.forEach(e =>  {
+                    errors += `${e}, `
+                })
+                this.alertMessage = errors.substring(0, errors.length-2);
+            } else {
+                this.alertMessage = err.response.data.error;
+            }
         }
     },
     watch: {

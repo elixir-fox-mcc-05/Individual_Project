@@ -88,7 +88,7 @@ export default {
         },
         showMyTeam() {
             const { access_token } = localStorage;
-            axios.get('http://localhost:4000/teams', {
+            axios.get('https://infinite-caverns-50726.herokuapp.com/teams', {
                 headers: {
                     access_token
                 }
@@ -109,7 +109,7 @@ export default {
         },
         showAllTeam() {
             const { access_token } = localStorage;
-            axios.get('http://localhost:4000/teams/all', {
+            axios.get('https://infinite-caverns-50726.herokuapp.com/teams/all', {
                 headers: {
                     access_token
                 }

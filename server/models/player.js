@@ -72,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
             })
             .then(team => {
               team.Players.forEach(player => {
-                if(player.position === this.position) {
+                if(player.position === this.position && player.position === 'Starter') {
                   counter++
                 }
                 if(player.status === 'Starter') {

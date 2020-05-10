@@ -37,7 +37,7 @@ export default {
         },
         releasePlayer(id) {
             const { access_token } = localStorage;
-            axios.delete(`http://localhost:4000/players/${id}` , {
+            axios.delete(`https://infinite-caverns-50726.herokuapp.com/players/${id}` , {
                 headers: {
                     access_token
                 }

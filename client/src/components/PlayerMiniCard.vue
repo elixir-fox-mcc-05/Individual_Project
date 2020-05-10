@@ -1,13 +1,13 @@
 <template>
     <div class="player-card">
         <div class="player-name">
-            <h4>{{ player.name }}</h4>
+            <h5>{{ player.name }}</h5>
         </div>
         <div class="player-position">
-            <h5>{{ player.position }}</h5>
+            <h6>{{ player.position }}</h6>
         </div>
         <div class="player-team">
-            <h5>{{ player.team }}</h5>
+            <h6>{{ player.team }}</h6>
         </div>
     </div>
 </template>
@@ -25,7 +25,7 @@ export default {
         padding: 3px;
         width: 250px;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 25px);
+        grid-template-rows: repeat(2, 20px);
         background-color: rgba(204, 204, 204, 0.986);
         margin: 3px 0;
         border-radius: 7px;

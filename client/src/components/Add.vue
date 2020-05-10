@@ -25,7 +25,7 @@ export default {
     methods: {
         addNewTeam() {
             const { access_token } = localStorage;
-            axios.post('http://localhost:4000/teams', {
+            axios.post('https://infinite-caverns-50726.herokuapp.com/teams', {
                 name: this.teamName
             }, {
                 headers: {

@@ -37,7 +37,7 @@ export default {
     methods: {
         getPlayer(id) {
             const { access_token } = localStorage;
-            axios.get(`http://localhost:4000/teams/${id}`, {
+            axios.get(`https://infinite-caverns-50726.herokuapp.com/teams/${id}`, {
                 headers: {
                     access_token
                 }

@@ -49,7 +49,7 @@ export default {
         addPlayer(newPlayer) {
             const { name, position, team, status } = newPlayer;
             const { access_token } = localStorage;
-            axios.post(`http://localhost:4000/players/${this.teamId}`, {
+            axios.post(`https://infinite-caverns-50726.herokuapp.com/players/${this.teamId}`, {
                 name,
                 position,
                 team,

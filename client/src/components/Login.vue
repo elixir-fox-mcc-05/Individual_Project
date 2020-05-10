@@ -40,7 +40,7 @@ export default {
     },
     methods: {
         login() {
-            axios.post('http://localhost:4000/users/login', {
+            axios.post('https://infinite-caverns-50726.herokuapp.com/users/login', {
                 email: this.loginEmail,
                 password: this.loginPassword
             })

@@ -57,7 +57,7 @@ export default {
     methods: {
         getAllTeam() {
             const { access_token } = localStorage;
-            axios.get('http://localhost:4000/teams/nfl', {
+            axios.get('https://infinite-caverns-50726.herokuapp.com/teams/nfl', {
                 headers: {
                     access_token
                 }
@@ -74,13 +74,12 @@ export default {
         },
         getNFLPlayer(team, position) {
             const { access_token } = localStorage;
-            axios.get(`http://localhost:4000/players/${position}/${team}`, {
+            axios.get(`https://infinite-caverns-50726.herokuapp.com/players/${position}/${team}`, {
                 headers: {
                     access_token
                 }
             })
                 .then(res => {
-                    console.log(res);
                     this.players = [];
                     res.data.player.forEach(player => {
                         this.players.push(player);

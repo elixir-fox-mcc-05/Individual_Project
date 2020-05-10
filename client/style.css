@@ -1,0 +1,17 @@
+.form-style {
+    display:flex; 
+    align-items:center;
+    height: inherit;
+    color: white;
+    flex-direction:column;
+    flex-wrap: wrap;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
+    background-image : url(https://i.pinimg.com/originals/92/d1/46/92d1466d5e39c20927ee6bc642e24e17.jpg);
+    background-size: 100%;
+    background-position: center;
+    cursor: pointer;
+}
+a {
+    cursor: pointer;
+}

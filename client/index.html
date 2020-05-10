@@ -25,6 +25,10 @@
                         <input type="password" placeholder="********" v-model="userData.password">
                         <br>
                         <button @click=login>Login</button>
+                        <div class="col-sm">
+                            <p>Or Login Using Google Account</p>
+                        </div>
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div> 
                     </div>
                 </div>
             </form>
@@ -86,7 +90,7 @@
             </div>
         </div>
     </div>
-
+    
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

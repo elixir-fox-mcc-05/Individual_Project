@@ -14,7 +14,11 @@ var app = new Vue({
         },
         isLogin: false,
         globalNews: [],
-        covid:''
+        covid:'',
+        googleSignInParams: {
+            client_id: '1060706521076-juov4ohnrue7nuq23e07guj031eok3gb.apps.googleusercontent.com'
+        }
+        
     },
     methods: {
 
@@ -46,6 +50,10 @@ var app = new Vue({
         },
 
         logout(){
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function() {
+                swal('You have logged out.'); 
+            });
             localStorage.clear()
             this.isLogin = false
         },
@@ -89,6 +97,30 @@ var app = new Vue({
         logout(){
             localStorage.clear()
             this.isLogin = false
+        },
+
+        onSignIn(googleUser) {
+            var id_token = googleUser.getAuthResponse().id_token; 
+            console.log(id_token);
+               
+            axios({
+                method: 'POST',
+                url: baseUrl + '/users/googleSign',
+                data: {
+                    'id_token' : id_token,
+                }
+            })
+                .then(data => {
+                    localStorage.setItem('access_token', data.token)
+                    console.log(data);
+                    this.isLogin=true
+                    this.readGlobalNews()
+                    this.readCovid()
+                    this.readIndoNews()
+                })
+                .catch(err => {
+                    swal("Upss", err.responseJSON, "error");
+                })
         }
 
     },

@@ -3,7 +3,7 @@ const router = express.Router()
 const dashboardController = require('../controllers/dashboardController')
 const { authentication } = require('../middlewares/authentication')
 
-// router.use(authentication)
+router.use(authentication)
 router.post('/movie/popular', dashboardController.getPopularMovies)
 router.post('/movie/top_rated', dashboardController.getTopRatedMovies)
 router.post('/movie/now_playing', dashboardController.getNowPlayingMovies)

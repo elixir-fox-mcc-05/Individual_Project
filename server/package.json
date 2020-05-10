@@ -8,6 +8,10 @@
     "dev": "NODE_ENV=development nodemon app.js",
     "start": "node app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IrwanKhaliq/Individual_Project.git"
+  },
   "keywords": [],
   "author": "Irwan",
   "license": "ISC",

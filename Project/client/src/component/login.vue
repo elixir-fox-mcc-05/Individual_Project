@@ -30,15 +30,17 @@
                     </form>
                 </div>
             </div>
+            <googleLogin :params="params" :onSuccess="onSuccess" @click="onSuccess">Google Login</googleLogin>
         </div>
     </div>
   </div>
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login';
 export default {
     name: 'login',
-    props : ['logged_in', 'errMsg'],
+    props : ['logged_in', 'errMsg', 'params'],
     data() {
         return {
             emailRegis : '',
@@ -66,6 +68,9 @@ export default {
             this.emailLogin = ''
             this.passwordLogin = ''
 
+        },
+        onSuccess() {
+            this.$$emit('onSuccess')
         }
     }
 

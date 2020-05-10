@@ -3,8 +3,10 @@
         <login
         :logged_in="logged_in"
         :errMsg="errMsg"
+        :params="params"
         @register="register"
         @login="login"
+        @onSuccess="onSuccess"
         ></login>
 
         <mainpage
@@ -29,6 +31,7 @@
 import axios from "axios"
 import login from "./component/login.vue"
 import mainpage from "./component/mainpage.vue"
+import GoogleLogin from 'vue-google-login';
 export default {
     name : "app",
     components: {
@@ -45,7 +48,10 @@ export default {
             drama : [],
             action : [],
             anime : [],
-            romance : []
+            romance : [],
+            params : {
+                clientId : '196622859487-effn4nnuqhaig4e85so5lcolckcuuuqn.apps.googleusercontent.com'
+            }
         }
     },
     methods: {
@@ -166,9 +172,6 @@ export default {
                     console.log(err)
                 })
         },
-
-
-
         getSearch(data) {
             console.log('ini data get search',data)
             axios.get(`http://www.omdbapi.com/?apikey=606c2e47&s=${data.searchMovie}`)
@@ -186,7 +189,24 @@ export default {
                 .catch(err => {
                     console.log(err)
                 })
+        },
+        onSuccess(googleUser) {
+        const id_token = googleUser.getAuthResponse().id_token;
+            axios({
+                url : `http://localhost:3000/users/googleLogin`,
+                method : 'post',
+                headers : {
+                    id_token : id_token
+                }
+            })
+            .done(data => {
+                localStorage.setItem('token', data.token)
+            })
+            .fail(err => {
+                console.log(err)
+            })
         }
+
 
     },
     created(){

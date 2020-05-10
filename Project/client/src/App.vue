@@ -109,6 +109,9 @@ export default {
                     console.log('ini data',data.data.Movie)
                     this.drama = data.data.Movie
                     this.movie = []
+                    this.anime = []
+                    this.romance = []
+                    this.action = []
                 })
                 .catch(err => {
                     console.log(err)

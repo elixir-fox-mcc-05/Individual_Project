@@ -7,7 +7,7 @@ function generateToken(data){
 function verifyToken(data){
     // console.log(process.env.SECRET)
     let results = jwt.verify(data,process.env.SECRET)
-    console.log(results)
+    // console.log(results)
     return results
 }
 

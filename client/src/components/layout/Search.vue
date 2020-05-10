@@ -29,7 +29,7 @@ export default {
             // console.log(name)
             // let data = this.searchName
             this.$emit('search',name)
-            this.searchName = ''
+
         }
     },
 

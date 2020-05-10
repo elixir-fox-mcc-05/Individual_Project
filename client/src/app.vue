@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-    <Header></Header>
+    <Header :loggedIn="loggedIn" @logout="logout"></Header>
     <Login :email="email" :password="password" @login="login" :loggedIn="loggedIn"></Login>
     <Menu :foods="foods" :loggedIn="loggedIn" :searchName="searchName" @search="search"></Menu>
     <Error :errorText="errorText" :showError="showError"></Error>
@@ -42,6 +42,13 @@ export default {
         }
     },
     methods: {
+        checkToken(){
+            if(localStorage.token){
+                this.loggedIn = true
+            }else{
+                this.loggedIn = false
+            }
+        },
         login(data){
             // console.log(data)
             axios({
@@ -55,7 +62,7 @@ export default {
             .then(response => {
                 this.showError = false
                 console.log(response)
-                let token = data.token
+                let token = response.data.token
                 localStorage.setItem('token',token)
                 this.loggedIn = true
             })
@@ -70,21 +77,28 @@ export default {
             axios({
                 method:'post',
                 url:'http://localhost:3000/foods/search',
+                headers : {
+                    token : localStorage.token
+                },
                 data : {
                     searchname : name
                 }
             })
             .then(data => {
-                console.log(data.data)
+                // console.log(data.data)
                 this.foods = data.data.meals
-
+        
             })
             .catch(err => {
                 this.showError = true
-                this.errorText = err.response
+                this.errorText = err.response.data.err
             })
             // console.log(name)
-
+            this.searchName = ''
+        },
+        logout(){
+            this.loggedIn = !this.loggedIn
+            localStorage.clear()
         }
     },
     created(){
@@ -101,7 +115,7 @@ export default {
         .catch(err => {
             console.log(err.response.data)
         })
-
+        this.checkToken()
     }
 }
 </script>

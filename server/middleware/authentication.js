@@ -5,9 +5,9 @@ function authentication(req,res,next){
     let token = req.headers.token
     
     try{
-        // console.log('test')
+        console.log('test')
         let decode = verifyToken(token)
-        // console.log(decode)
+        console.log(decode)
         let {id} = decode
         
         User.findByPk(id)

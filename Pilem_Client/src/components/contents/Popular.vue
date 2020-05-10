@@ -8,6 +8,7 @@
           <div class="card-body">
             <p class="text-dark">{{ PopularMovie.title }}</p>
             <p class="text-warning">{{ PopularMovie.vote_average }}</p>
+            <Detail :movieId="PopularMovie.id" :posterPathSmall="posterPathSmall"></Detail>
           </div>
         </div>
       </div>
@@ -17,9 +18,14 @@
 
 <script>
 import axios from "axios";
+import Detail from "./details/Detail.vue";
+
 export default {
   name: "Popular",
-  props: ["serverUrl", "posterPath"],
+  props: ["serverUrl", "posterPath", "posterPathSmall"],
+  components: {
+    Detail
+  },
   data() {
     return {
       PopularMovies: null
@@ -38,7 +44,7 @@ export default {
         }
       })
         .then(data => {
-          this.PopularMovies = data.data.PopularMovies
+          this.PopularMovies = data.data.PopularMovies;
         })
         .catch(err => {
           console.log(err);

@@ -2,7 +2,13 @@
   <div>
     <NavigationBar v-if="authenticated" @auth="auth"></NavigationBar>
     <LandingPage v-if="!authenticated" :serverUrl="serverUrl" @auth="auth"></LandingPage>
-    <ContentPage v-if="authenticated" :serverUrl="serverUrl" :posterPath="posterPath" @auth="auth"></ContentPage>
+    <ContentPage
+      v-if="authenticated"
+      :serverUrl="serverUrl"
+      :posterPath="posterPath"
+      :posterPathSmall="posterPathSmall"
+      @auth="auth"
+    ></ContentPage>
     <Footer></Footer>
   </div>
 </template>
@@ -10,7 +16,7 @@
 <script>
 import NavigationBar from "./components/NavigationBar.vue";
 import LandingPage from "./components/LandingPage.vue";
-import ContentPage from "./components/ContentPage.vue"
+import ContentPage from "./components/ContentPage.vue";
 import Footer from "./components/Footer.vue";
 
 export default {
@@ -26,6 +32,7 @@ export default {
       AppName: "Pilem",
       serverUrl: "http://localhost:3000",
       posterPath: "https://image.tmdb.org/t/p/w500",
+      posterPathSmall: "https://image.tmdb.org/t/p/w200",
       authenticated: false
     };
   },

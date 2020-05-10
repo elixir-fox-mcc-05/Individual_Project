@@ -12,6 +12,7 @@
           <div class="card-body">
             <p class="text-dark">{{ NowPlayingMovie.title }}</p>
             <p class="text-warning">{{ NowPlayingMovie.vote_average }}</p>
+            <Detail :movieId="NowPlayingMovie.id" :posterPathSmall="posterPathSmall"></Detail>
           </div>
         </div>
       </div>
@@ -21,9 +22,14 @@
 
 <script>
 import axios from "axios";
+import Detail from "./details/Detail.vue"
+
 export default {
   name: "NowPlaying",
-  props: ["serverUrl", "posterPath"],
+  props: ["serverUrl", "posterPath", "posterPathSmall"],
+  components: {
+      Detail
+  },
   data() {
     return {
       NowPlayingMovies: null

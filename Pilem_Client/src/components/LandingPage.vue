@@ -19,7 +19,11 @@
       </p>
       <p class="lead">
         <button class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#signin">Sign In</button>
-        <SignIn id="signin" :serverUrl="serverUrl" @auth="auth"></SignIn>
+        <SignIn id="signin" :serverUrl="serverUrl" @auth="auth"></SignIn>|
+        <button
+          v-google-signin-button="clientId"
+          class="google-signin-button btn btn-lg btn-secondary"
+        >Sign In with Google</button>
       </p>
     </main>
 
@@ -28,19 +32,51 @@
 </template>
 
 <script>
+import axios from "axios";
 import SignUp from "./forms/SignUp.vue";
 import SignIn from "./forms/SignIn.vue";
+import GoogleSignInButton from "vue-google-signin-button-directive";
 
 export default {
   name: "LandingPage",
   props: ["serverUrl"],
+  directives: {
+    GoogleSignInButton
+  },
   components: {
     SignUp,
     SignIn
   },
+  data() {
+    return {
+      clientId:
+        "791703797985-e4smivtpnrmm74e678989dhov0hhrl6h.apps.googleusercontent.com"
+    };
+  },
   methods: {
     auth() {
-      this.$emit("auth")
+      this.$emit("auth");
+    },
+    OnGoogleAuthSuccess(googleUser) {
+      const id_token = googleUser;
+
+      axios({
+        method: "post",
+        url: this.serverUrl + "/google-signin",
+        headers: {
+          google_token: id_token
+        }
+      })
+        .then(data => {
+          localStorage.setItem("access_token", data.data.access_token);
+          this.auth();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    OnGoogleAuthFail(error) {
+      console.log(error);
     }
   }
 };

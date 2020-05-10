@@ -1,16 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css">
-  <title>ABC- News</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <meta name="google-signin-client_id" content="1060706521076-juov4ohnrue7nuq23e07guj031eok3gb.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <title>ABC- News</title>
 </head>
 <body>
-  <div class="paper container">
-    <h1>Some Fresh Title</h1>
-    <p>This is where some content would go.</p>
-  </div>
+    <div id="app">
+        <div class="landingPage container" v-if="!isLogin">
+            <h1> {{msg}} </h1>
+            <form v-on:submit.prevent="login">
+                <div class="container">
+                    <div class="card loginForm">
+                        <h2>Login</h2>
+                        <label for="emailLogin">Email</label>
+                        <input type="text" placeholder="mail@mail.com" v-model="userData.email">
+        
+                        <label for="passwordLogin">Password</label>
+                        <input type="password" placeholder="********" v-model="userData.password">
+                        <br>
+                        <button @click=login>Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="mainPage" v-if="isLogin">
+            <nav class="border fixed split-nav">
+                <div class="nav-brand">
+                  <h3><a href="#">ABC NEWS</a></h3>
+                </div>
+                <div class="collapsible">
+                  <input id="collapsible1" type="checkbox" name="collapsible1">
+                  <button>
+                  <label for="collapsible1">
+                      <div class="bar1"></div>
+                      <div class="bar2"></div>
+                      <div class="bar3"></div>
+                    </label>
+                  </button>
+                  <div class="collapsible-body">
+                    <ul class="inline">
+                      <li><a href="#" v-on:click="logout">Logout</a></li>
+                    </ul>
+                  </div>
+                </div>
+            </nav>
+            
+            <h1 v-if="!isGLobal"> Global Headline News </h1>
+            <div class="row">
+                <div class="col-3 col">
+                    <div class="card covidCard" style="width: 300px;">
+                        <img :src="covid.countryInfo.flag" alt="Indonesia's flag">
+                        <h3>Covid-19 Report</h3>
+                        <table>
+                            <thead>
+                                <tr><th>Cases</th> <td>{{covid.cases}}</td></tr>
+                                <tr><th>Deaths</th> <td>{{covid.deaths}}</td> </tr>
+                                <tr><th>Recovered</th><td>{{covid.recovered}}</td></tr>
+                                <tr><th>Active</th><td>{{covid.active}}</td></tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-9 col" >
+                    <div class="row globalNewsCard">
+                        <div  v-for="(global, index) in globalNews" :key="index">
+                            <div class="card" style="width: 340px;">
+                                <img class="image-bottom" :src=global.urlToImage alt="Card example image">
+                                <div class="card-body">
+                                <h4 class="card-title"> {{global.title}} </h4>
+                                <h5 class="card-subtitle">Author: {{global.author}}</h5>
+                                <p class="card-text"> {{global.description}} </p>
+                                <a :href="global.url">Read more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

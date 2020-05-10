@@ -7,7 +7,7 @@
                         <a href="#!" class="brand-logo">Muvi</a>
                         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                         <ul class="right hide-on-med-and-down" v-if="currentPage == 'dashboardPage'">
-                            <li><a href="">Dashboard</a></li>
+                            <li><a @click.prevent="toDashboard">Dashboard</a></li>
                             <li><a @click.prevent="logoutUser">Logout</a></li>
                         </ul>
                     </div>
@@ -28,6 +28,9 @@ export default {
     methods: {
         logoutUser() {
             this.$emit('logoutUser')
+        },
+        toDashboard() {
+            this.$emit('toDashboard')
         }
     }
 }

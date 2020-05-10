@@ -19,6 +19,7 @@
                 :baseUrl='baseUrl'
                 :currentPage="currentPage"
                 @logoutUser="logoutUser"
+                @updatePage="updatePage"
             >
 
             </dashboardPage>
@@ -41,27 +42,27 @@ export default {
             baseUrl: 'http://localhost:3000',
             currentPage: 'landingPage',
             moviePopular: {
-                page: '1',
+                page: 1,
                 data: []
             },
             movieTopRated: {
-                page: '1',
+                page: 1,
                 data: []
             },
             movieNowPlaying: {
-                page: '1',
+                page: 1,
                 data: []
             },
             tvPopular: {
-                page: '1',
+                page: 1,
                 data: []
             },
             tvTopRated: {
-                page: '1',
+                page: 1,
                 data: []
             },
             tvNowPlaying: {
-                page: '1',
+                page: 1,
                 data: []
             },
             movieDetail: [],
@@ -229,22 +230,51 @@ export default {
                 })
         },
         logoutUser() {
+            this.moviePopular.page = 1
+            this.movieTopRated.page = 1
+            this.movieNowPlaying.page = 1
+            this.tvPopular.page = 1
+            this.tvTopRated.page = 1
+            this.tvNowPlaying.page = 1
             localStorage.clear()
             this.currentPage = 'landingPage'
+        },
+        updatePage(page, section) {
+            console.log(section)
+            console.log(page)
+            if(section == 'popularMovie') {
+                this.moviePopular.page = page
+                this.fetchPopularMovie()
+            } else if(section == 'topRatedMovie') {
+                this.movieTopRated.page = page
+                this.fetchTopRatedMovie()
+            } else if(section == 'nowPlayingMovie') {
+                this.movieNowPlaying.page = page
+                this.fetchNowPlayingMovie()
+            } else if(section == 'popularTv') {
+                this.tvPopular.page = page
+                this.fetchPopularTvSeries()
+            } else if(section == 'topRatedTv') {
+                this.tvTopRated.page = page
+                this.fetchTopRatedTvSeries()
+            } else if(section == 'nowPlayingTv') {
+                this.tvNowPlaying.page = page
+                this.fetchNowPlayingTvSeries()
+            }
         }
     },
     created() {
         if(localStorage.token) {
             this.currentPage = 'dashboardPage'
+            this.fetchPopularMovie()
+            this.fetchTopRatedMovie()
+            this.fetchNowPlayingMovie()
+            this.fetchPopularTvSeries()
+            this.fetchTopRatedTvSeries()
+            this.fetchNowPlayingTvSeries()
         } else {
             this.currentPage = 'landingPage'
         }
-        this.fetchPopularMovie()
-        this.fetchTopRatedMovie()
-        this.fetchNowPlayingMovie()
-        this.fetchPopularTvSeries()
-        this.fetchTopRatedTvSeries()
-        this.fetchNowPlayingTvSeries()
     }
 }
 </script>

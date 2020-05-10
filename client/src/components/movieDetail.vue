@@ -18,6 +18,7 @@
                 <p class="light">{{detail.runtime}} Minutes</p>
                 <p>Original Language</p>
                 <p class="light">{{detail.original_language}}</p>
+                <button class="btn" @click.prevent="emptyDetail">Back</button>
             </div>
         </div>
     </div>
@@ -33,6 +34,11 @@ export default {
             imdbUrl: `https://www.imdb.com/title/${this.detail.imdb_id}`,
             imgUrl: `https://image.tmdb.org/t/p/w500${this.detail.poster_path}`,
             backdropPath: `https://image.tmdb.org/t/p/w500${this.detail.backdrop_path}`
+        }
+    },
+    methods: {
+        emptyDetail() {
+            this.$emit('emptyDetail')
         }
     },
     computed: {

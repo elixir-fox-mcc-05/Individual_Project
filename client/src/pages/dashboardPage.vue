@@ -3,6 +3,7 @@
         <NavbarSection
             @logoutUser="logoutUser"
             :currentPage="currentPage"
+            @toDashboard="toDashboard"
         ></NavbarSection>
 
         <!-- Main Section -->
@@ -55,9 +56,9 @@
         </div>
 
         <!-- See-Detail -->
-        <div v-if="detail">
-            <movieDetail v-if="code == 'movie'" :detail="detail"></movieDetail>
-            <tvDetail v-else-if="code == 'tv'" :detail="detail"></tvDetail>
+        <div v-else-if="detail">
+            <movieDetail v-if="code == 'movie'" :detail="detail" @emptyDetail="emptyDetail"></movieDetail>
+            <tvDetail v-else-if="code == 'tv'" :detail="detail" @emptyDetail="emptyDetail"></tvDetail>
         </div>
 
         <!-- ListSection -->
@@ -73,6 +74,11 @@
                         @seeDetail="seeDetail"
                     ></movieCard>
                 </div>
+                <previousNextButton
+                    :page="moviePopular.page"
+                    :listSection="listSection"
+                    @updatePage="updatePage"
+                ></previousNextButton>
             </div>
         </div>
         <div v-else-if="listSection == 'topRatedMovie'">
@@ -87,6 +93,11 @@
                         @seeDetail="seeDetail"
                     ></movieCard>
                 </div>
+                <previousNextButton
+                    :page="movieTopRated.page"
+                    :listSection="listSection"
+                    @updatePage="updatePage"
+                ></previousNextButton>
             </div>
         </div>
         <div v-else-if="listSection == 'nowPlayingMovie'">
@@ -101,6 +112,11 @@
                         @seeDetail="seeDetail"
                     ></movieCard>
                 </div>
+                <previousNextButton
+                    :page="movieNowPlaying.page"
+                    :listSection="listSection"
+                    @updatePage="updatePage"
+                ></previousNextButton>
             </div>
         </div>
         <div v-else-if="listSection == 'popularTv'">
@@ -115,6 +131,11 @@
                         @seeDetail="seeDetail"
                     ></movieCard>
                 </div>
+                <previousNextButton
+                    :page="tvPopular.page"
+                    :listSection="listSection"
+                    @updatePage="updatePage"
+                ></previousNextButton>
             </div>
         </div>
         <div v-else-if="listSection == 'topRatedTv'">
@@ -129,6 +150,11 @@
                         @seeDetail="seeDetail"
                     ></movieCard>
                 </div>
+                <previousNextButton
+                    :page="tvTopRated.page"
+                    :listSection="listSection"
+                    @updatePage="updatePage"
+                ></previousNextButton>
             </div>
         </div>
         <div v-else-if="listSection == 'nowPlayingTv'">
@@ -143,6 +169,11 @@
                         @seeDetail="seeDetail"
                     ></movieCard>
                 </div>
+                <previousNextButton
+                    :page="tvNowPlaying.page"
+                    :listSection="listSection"
+                    @updatePage="updatePage"
+                ></previousNextButton>
             </div>
         </div>
         
@@ -158,12 +189,13 @@ import FooterSection from '../components/footer'
 import movieCard from '../components/movieCard'
 import movieDetail from '../components/movieDetail'
 import tvDetail from '../components/tvDetail'
+import previousNextButton from '../components/previousNextButton'
 import axios from 'axios'
 
 export default {
     name: 'dashboardPage',
     components: {
-        NavbarSection, FooterSection, movieCard, movieDetail, tvDetail
+        NavbarSection, FooterSection, movieCard, movieDetail, tvDetail, previousNextButton
     },
     props: [
         'moviePopular',
@@ -194,9 +226,6 @@ export default {
             }
         },
         seeDetail(list) {
-            console.log(this.baseUrl)
-            console.log(this.code)
-            console.log(list)
             axios({
                 method: 'get',
                 url: `${this.baseUrl}/dashboard/${this.code}/${list.id}`,
@@ -205,7 +234,6 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log(response.data.Detail)
                     this.detail = response.data.Detail
                 })
                 .catch(err => {
@@ -214,6 +242,18 @@ export default {
         },
         logoutUser() {
             this.$emit('logoutUser')
+        },
+        emptyDetail() {
+            this.detail = ''
+        },
+        toDashboard() {
+            this.currentSection = 'mainSection'
+            this.listSection = ''
+            this.code = ''
+            this.detail = ''
+        },
+        updatePage(section, page) {
+            this.$emit('updatePage', section, page)
         }
     }
 }

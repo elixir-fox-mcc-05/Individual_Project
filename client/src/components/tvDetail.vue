@@ -10,15 +10,13 @@
                 <p class="light">{{detail.overview}}</p>
                 <p>Homepage</p>
                 <a class="light" :href="detail.homepage">Link</a>
-                <p>Duration</p>
-                <p class="light">{{detail.runtime}} Minutes</p>
                 <p>Original Language</p>
                 <p class="light">{{detail.original_language}}</p>
                 <p>Episodes</p>
                 <p class="light">{{detail.number_of_episodes}}</p>
                 <p>Seasons</p>
                 <p class="light">{{detail.number_of_seasons}}</p>
-
+                <button class="btn" @click.prevent="emptyDetail">Back</button>
             </div>
         </div>
     </div>
@@ -33,6 +31,11 @@ export default {
         return {
             imgUrl: `https://image.tmdb.org/t/p/w500${this.detail.poster_path}`,
             backdropPath: `https://image.tmdb.org/t/p/w500${this.detail.backdrop_path}`
+        }
+    },
+    methods: {
+        emptyDetail() {
+            this.$emit('emptyDetail')
         }
     },
     computed: {

@@ -61,7 +61,7 @@ class DashboardController {
         })
             .then(response => {
                 res.status(200).json({
-                    MovieDetail: response.data
+                    Detail: response.data
                 })
             })
             .catch(err => {
@@ -129,7 +129,7 @@ class DashboardController {
         })
             .then(response => {
                 res.status(200).json({
-                    TvSeriesDetail: response.data
+                    Detail: response.data
                 })
             })
             .catch(err => {

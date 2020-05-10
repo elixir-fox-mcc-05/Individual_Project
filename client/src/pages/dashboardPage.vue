@@ -1,10 +1,11 @@
 <template>
-    <div class="grey darken-4 grey-text text-lighten-4">
+    <div class="grey darken-4 white-text">
         <NavbarSection>
 
         </NavbarSection>
 
-        <div class="center">
+        <!-- Main Section -->
+        <div v-if="currentSection == 'mainSection'" class="center">
             <div class="row">
                 <div class="slider" id="sliderDashboardPage">
                     <ul class="slides">
@@ -19,13 +20,13 @@
 
                 <h3>Movies</h3>
                 <div class="col m4 s12">
-                    <h5><a>Popular Movies</a></h5>
+                    <button class="btn" @click.prevent="changeSection('listSection', 'popularMovie')">Popular Movies</button>
                 </div>
                 <div class="col m4 s12">
-                    <h5><a>Top Rated Movies</a></h5>
+                    <button class="btn" @click.prevent="changeSection('listSection', 'topRatedMovie')">Top Rated Movies</button>
                 </div>
                 <div class="col m4 s12">
-                    <h5><a>Now Playing</a></h5>
+                    <button class="btn" @click.prevent="changeSection('listSection', 'nowPlayingMovie')">Now Playing</button>
                 </div>
             </div>
             <div class="row">
@@ -41,15 +42,107 @@
                 </div>
                 <h3>TV Series</h3>
                 <div class="col m4 s12">
-                    <h5><a>Popular TV Series</a></h5>
+                    <button class="btn" @click.prevent="changeSection('listSection', 'popularTv')">Popular TV Series</button>
                 </div>
                 <div class="col m4 s12">
-                    <h5><a>Top Rated TV Series</a></h5>
+                    <button class="btn" @click.prevent="changeSection('listSection', 'topRatedTv')">Top Rated TV Series</button>
                 </div>
                 <div class="col m4 s12">
-                    <h5><a>Now Playing<a></h5>
+                    <button class="btn" @click.prevent="changeSection('listSection', 'nowPlayingTv')">Now Playing</button>
                 </div>
             </div>
+        </div>
+
+        <!-- ListSection -->
+        <div v-else-if="listSection == 'popularMovie'">
+            <h2 class="center">Popular Movies</h2>
+            <div class="container">
+                <div class="row">
+                    <movieCard v-for="list in moviePopular.data"
+                        :key="list.id"
+                        :list="list"
+                        :code="code"
+                        :baseUrl='baseUrl'
+                        @seeDetail="seeDetail"
+                    ></movieCard>
+                </div>
+            </div>
+        </div>
+        <div v-else-if="listSection == 'topRatedMovie'">
+            <h2 class="center">Top Rated Movies</h2>
+            <div class="container">
+                <div class="row">
+                    <movieCard v-for="list in movieTopRated.data"
+                        :key="list.id"
+                        :list="list"
+                        :code="code"
+                        :baseUrl='baseUrl'
+                        @seeDetail="seeDetail"
+                    ></movieCard>
+                </div>
+            </div>
+        </div>
+        <div v-else-if="listSection == 'nowPlayingMovie'">
+            <h2 class="center">Now Playing Movies</h2>
+            <div class="container">
+                <div class="row">
+                    <movieCard v-for="list in movieNowPlaying.data"
+                        :key="list.id"
+                        :list="list"
+                        :code="code"
+                        :baseUrl='baseUrl'
+                        @seeDetail="seeDetail"
+                    ></movieCard>
+                </div>
+            </div>
+        </div>
+        <div v-else-if="listSection == 'popularTv'">
+            <h2 class="center">Popular TV Series</h2>
+            <div class="container">
+                <div class="row">
+                    <movieCard v-for="list in tvPopular.data"
+                        :key="list.id"
+                        :list="list"
+                        :code="code"
+                        :baseUrl='baseUrl'
+                        @seeDetail="seeDetail"
+                    ></movieCard>
+                </div>
+            </div>
+        </div>
+        <div v-else-if="listSection == 'topRatedTv'">
+            <h2 class="center">Top Rated TV Series</h2>
+            <div class="container">
+                <div class="row">
+                    <movieCard v-for="list in tvTopRated.data"
+                        :key="list.id"
+                        :list="list"
+                        :code="code"
+                        :baseUrl='baseUrl'
+                        @seeDetail="seeDetail"
+                    ></movieCard>
+                </div>
+            </div>
+        </div>
+        <div v-else-if="listSection == 'nowPlayingTv'">
+            <h2 class="center">Now Playing TV Series</h2>
+            <div class="container">
+                <div class="row">
+                    <movieCard v-for="list in tvNowPlaying.data"
+                        :key="list.id"
+                        :list="list"
+                        :code="code"
+                        :baseUrl='baseUrl'
+                        @seeDetail="seeDetail"
+                    ></movieCard>
+                </div>
+            </div>
+        </div>
+        
+        <!-- See-Detail -->
+        <div v-if="detail">
+            <movieDetail v-if="code == 'movie'" :detail="detail"></movieDetail>
+            <tvDetail v-else-if="code == 'tv'" :detail="detail"></tvDetail>
         </div>
 
         <FooterSection>
@@ -61,11 +154,62 @@
 <script>
 import NavbarSection from '../components/navbar'
 import FooterSection from '../components/footer'
+import movieCard from '../components/movieCard'
+import movieDetail from '../components/movieDetail'
+import tvDetail from '../components/tvDetail'
+import axios from 'axios'
 
 export default {
     name: 'dashboardPage',
     components: {
-        NavbarSection, FooterSection
+        NavbarSection, FooterSection, movieCard, movieDetail, tvDetail
+    },
+    props: [
+        'moviePopular',
+        'movieTopRated',
+        'movieNowPlaying',
+        'tvPopular',
+        'tvTopRated',
+        'tvNowPlaying',
+        'baseUrl'
+    ],
+    data() {
+        return {
+            currentSection: 'mainSection',
+            listSection: '',
+            code: '',
+            detail: ''
+        }
+    },
+    methods: {
+        changeSection(section, listSection) {
+            this.currentSection = section
+            this.listSection = listSection
+            if(listSection == 'popularMovie' || listSection == 'topRatedMovie' || listSection == 'nowPlayingMovie') {
+                this.code = 'movie'
+            } else {
+                this.code = 'tv'
+            }
+        },
+        seeDetail(list) {
+            console.log(this.baseUrl)
+            console.log(this.code)
+            console.log(list)
+            axios({
+                method: 'get',
+                url: `${this.baseUrl}/dashboard/${this.code}/${list.id}`,
+                headers: {
+                    token: localStorage.token
+                }
+            })
+                .then(response => {
+                    console.log(response.data.Detail)
+                    this.detail = response.data.Detail
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
     }
 }
 </script>

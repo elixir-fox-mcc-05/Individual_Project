@@ -8,7 +8,15 @@
             </landingPage>
         </div>
         <div v-else-if="currentPage == 'dashboardPage'">
-            <dashboardPage>
+            <dashboardPage
+                :moviePopular="moviePopular"
+                :movieTopRated="movieTopRated"
+                :movieNowPlaying="movieNowPlaying"
+                :tvPopular="tvPopular"
+                :tvTopRated="tvTopRated"
+                :tvNowPlaying="tvNowPlaying"
+                :baseUrl='baseUrl'
+            >
 
             </dashboardPage>
         </div>
@@ -91,7 +99,6 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log(response.data)
                     this.moviePopular.data = response.data.PopularMovieList.results
                 })
                 .catch(err => {
@@ -179,7 +186,6 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log(response)
                     this.tvTopRated.data = response.data.TopRatedTvSeriesList.results
                 })
                 .catch(err => {
@@ -198,7 +204,6 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log(response.data.NowPlayingTvSeriesList.results)
                     this.tvNowPlaying.data = response.data.NowPlayingTvSeriesList.results
                 })
                 .catch(err => {

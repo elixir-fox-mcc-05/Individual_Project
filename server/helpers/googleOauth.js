@@ -11,7 +11,7 @@ module.exports = {
               const payload = ticket.getPayload();
               resolve(payload);
             }
-            verify().catch(reject);
+            verify().catch(console.error);
         })
     }
 }

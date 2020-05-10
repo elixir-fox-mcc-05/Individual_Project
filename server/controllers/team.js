@@ -1,4 +1,5 @@
 const { User, Team, Player } = require('../models');
+const axios = require('axios');
 
 class TeamController{
     static createTeam(req, res, next) {
@@ -29,6 +30,59 @@ class TeamController{
             .then(teams => {
                 res.status(200).json({
                     teams
+                })
+            })
+            .catch(err => {
+                next(err);
+            })
+    }
+
+    static getMyTeam(req, res, next) {
+        const UserId = req.userId;
+
+        Team
+            .findAll({
+                where: {
+                    UserId
+                },
+                include: [User, Player]
+            })
+            .then(teams => {
+                res.status(200).json({
+                    teams
+                })
+            })
+            .catch(err => {
+                next(err);
+            })
+    }
+
+    static getTeamById(req, res, next) {
+        const { id } = req.params;
+
+        Team
+            .findOne({
+                where: {
+                    id
+                },
+                include: [Player]
+            })
+            .then(team => {
+                res.status(200).json({
+                    team
+                })
+            })
+            .catch(err => {
+                next(err);
+            })
+    }
+
+    static getAllNFLTeam(req, res, next) {
+        
+        axios.get(`https://www.fantasyfootballnerd.com/service/nfl-teams/json/${process.env.NERDS_API}/`)
+            .then(results =>{
+                res.status(200).json({
+                    teams: results.data
                 })
             })
             .catch(err => {

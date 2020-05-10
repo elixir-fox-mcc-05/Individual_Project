@@ -6,7 +6,6 @@ const { authorizeTeamOwner, authorizePlayerOwner } = require('../middlewares/aut
 router.use( authenticateUser );
 router.post('/:team_id', authorizeTeamOwner, PlayerController.addPlayer);
 router.delete('/:id', authorizePlayerOwner, PlayerController.deletePlayer);
-router.get('/:position', PlayerController.fetchNFLPlayer);
-router.get('/prospect', PlayerController.topProspect);
+router.get('/:position/:team', PlayerController.fetchNFLPlayer);
 
 module.exports = router;

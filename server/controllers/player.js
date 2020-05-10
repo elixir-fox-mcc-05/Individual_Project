@@ -44,35 +44,18 @@ class PlayerController{
     }
 
     static fetchNFLPlayer(req, res, next) {
-        const { position } = req.params;
+        const { position, team } = req.params;
+        let lists = [];
 
         axios(`https://www.fantasyfootballnerd.com/service/players/json/${process.env.NERDS_API}/${position}/`)
             .then(results => {
-                res.status(200).json({
-                    player: results.data
-                })
-            })
-            .catch(err => {
-                next(err);
-            })
-    }
-
-    static topProspect(req, res, next) {
-        axios(`https://www.fantasyfootballnerd.com/service/draft-rankings/json/${process.env.NERDS_API}/1/`)
-            .then(results => {
-                console.log(results);
-                let ranks = [];
-                results.data.DraftRankings.forEach(player => {
-                    let prospect = {
-                        name: player.displayName,
-                        position: player.position,
-                        team: player.team,
-                        rank: player.overallRank
-                    };
-                    ranks.push(prospect);
+                results.data.Players.forEach(player => {
+                    if(player.team === team) {
+                        lists.push(player);
+                    }
                 })
                 res.status(200).json({
-                    ranks
+                    player: lists
                 })
             })
             .catch(err => {

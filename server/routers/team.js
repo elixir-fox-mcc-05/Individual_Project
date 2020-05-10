@@ -5,7 +5,10 @@ const { authorizeTeamOwner } = require('../middlewares/authorization.js');
 
 router.use(authenticateUser);
 router.post('/', TeamController.createTeam);
-router.get('/', TeamController.getAllTeam);
+router.get('/', TeamController.getMyTeam);
+router.get('/all', TeamController.getAllTeam);
+router.get('/nfl', TeamController.getAllNFLTeam);
+router.get('/:id', TeamController.getTeamById);
 router.delete('/:id', authorizeTeamOwner, TeamController.deleteTeam);
 
 module.exports = router;

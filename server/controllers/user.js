@@ -1,6 +1,7 @@
 const { User } = require('../models');
 const { compareHash } = require('../helpers/bcrypt.js');
 const { generateToken } = require('../helpers/jwt.js');
+const { verifyIdToken } = require('../helpers/googleOauth.js');
 
 class UserController{
     static register(req, res, next) {
@@ -68,15 +69,16 @@ class UserController{
     static googleLogin(req, res, next) {
         let name;
         let email;
+        let username;
         let newUser = false;
         
-        const { google_token } = req.headers;
-        console.log(google_token);
+        const { google_token } = req.headers;;
 
         verifyIdToken(google_token)
             .then(payload => {
-                name = `${payload.given_name} ${payload.family_name}`
+                name = `${payload.name}`;
                 email = payload.email;
+                username = `${payload.given_name}${payload.family_name}`;
                 return User
                     .findOne({
                         where: {
@@ -92,16 +94,17 @@ class UserController{
                     return User
                         .create({
                             name,
+                            username,
                             email,
                             password: process.env.GOOGLE_PASSWORD_DEFAULT
                         })
                 }
             })
-            .then(newUser => {
+            .then(user => {
                 let code = newUser ? 201 : 200;
                 const access_token = generateToken({
-                    id: newUser.id,
-                    email:newUser.email
+                    id: user.id,
+                    email:user.email
                 })
                 res.status(code).json({
                     access_token

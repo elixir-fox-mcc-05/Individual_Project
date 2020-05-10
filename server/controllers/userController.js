@@ -9,7 +9,7 @@ class UserController {
         User
             .findOne({where:{email : req.body.email}})
             .then(data => {
-                console.log('test')
+                // console.log('test')
                 if(data){
                     // console.log('test')
                     if (password == data.password){

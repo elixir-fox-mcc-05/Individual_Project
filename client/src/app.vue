@@ -3,6 +3,7 @@
     <Header></Header>
     <Login :email="email" :password="password" @login="login" :loggedIn="loggedIn"></Login>
     <Menu :foods="foods" :loggedIn="loggedIn" :searchName="searchName" @search="search"></Menu>
+    <Error :errorText="errorText" :showError="showError"></Error>
     <Footer></Footer>
 </div>
 
@@ -14,14 +15,17 @@ import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Login from './components/article/Login'
 import Menu from './components/article/Menu'
+import Error from './components/ui/Error'
 import axios from 'axios'
+
 export default {
     name : "app",
     components : {
         Header,
         Footer,
         Login,
-        Menu
+        Menu,
+        Error
     },
     data(){
         return {
@@ -32,7 +36,9 @@ export default {
             loggedIn : false,
             email : '',
             password : '',
-            searchName : ''
+            searchName : '',
+            showError : false,
+            errorText : ''
         }
     },
     methods: {
@@ -47,12 +53,15 @@ export default {
                 }
             })
             .then(response => {
-                let token =data.token
+                this.showError = false
+                console.log(response)
+                let token = data.token
                 localStorage.setItem('token',token)
                 this.loggedIn = true
             })
             .catch(err => {
-                console.log(err.response)
+                this.showError = true
+                this.errorText = err.response.data.error
             })
             
         },
@@ -71,7 +80,8 @@ export default {
 
             })
             .catch(err => {
-                console.log(err.response)
+                this.showError = true
+                this.errorText = err.response
             })
             // console.log(name)
 
@@ -91,6 +101,7 @@ export default {
         .catch(err => {
             console.log(err.response.data)
         })
+
     }
 }
 </script>

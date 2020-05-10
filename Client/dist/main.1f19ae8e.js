@@ -10976,7 +10976,7 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","./..\\images\\bg-01.jpg":[["bg-01.49446d9e.jpg","images/bg-01.jpg"],"images/bg-01.jpg"],"_css_loader":"node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"view/main.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","./..\\images\\bg-01.jpg":[["bg-01.49446d9e.jpg","images/bg-01.jpg"],"images/bg-01.jpg"],"_css_loader":"node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"components/content.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11033,46 +11033,263 @@ exports.default = void 0;
 //
 //
 //
+var _default = {
+  name: "Detail",
+  props: ['datameals']
+};
+exports.default = _default;
+        var $783232 = exports.default || module.exports;
+      
+      if (typeof $783232 === 'function') {
+        $783232 = $783232.options;
+      }
+    
+        /* template */
+        Object.assign($783232, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "plx-card gold content" }, [
+      _c("div", {
+        staticClass: "pxc-bg",
+        style: { "background-image": "url(" + _vm.datameals.strMealThumb + ")" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "pxc-avatar" }, [
+        _c("img", { attrs: { src: _vm.datameals.strMealThumb } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "pxc-stopper" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "pxc-subcard" }, [
+        _c("div", { staticClass: "pxc-title" }, [
+          _vm._v(_vm._s(_vm.datameals.strMeal))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "pxc-sub" }, [
+          _vm._v(" " + _vm._s(_vm.datameals.strTags))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "pxc-feats" }, [
+          _c("span", [
+            _vm._v(
+              "ingredients : " +
+                _vm._s(
+                  this.datameals.strMeasure1 +
+                    "-" +
+                    this.datameals.strIngredient1 +
+                    "," +
+                    this.datameals.strMeasure2 +
+                    "-" +
+                    this.datameals.strIngredient2 +
+                    "," +
+                    this.datameals.strMeasure3 +
+                    "-" +
+                    this.datameals.strIngredient3 +
+                    "," +
+                    this.datameals.strMeasure4 +
+                    "-" +
+                    this.datameals.strIngredient4 +
+                    "," +
+                    this.datameals.strMeasure5 +
+                    "-" +
+                    this.datameals.strIngredient5 +
+                    "," +
+                    this.datameals.strMeasure6 +
+                    "-" +
+                    this.datameals.strIngredient6 +
+                    "," +
+                    this.datameals.strMeasure7 +
+                    "-" +
+                    this.datameals.strIngredient7 +
+                    "," +
+                    this.datameals.strMeasure8 +
+                    "-" +
+                    this.datameals.strIngredient8 +
+                    "," +
+                    this.datameals.strMeasure9 +
+                    "-" +
+                    this.datameals.strIngredient9 +
+                    "," +
+                    this.datameals.strMeasure10 +
+                    "-" +
+                    this.datameals.strIngredient10 +
+                    "," +
+                    this.datameals.strMeasure11 +
+                    "-" +
+                    this.datameals.strIngredient11 +
+                    "," +
+                    this.datameals.strMeasure12 +
+                    "-" +
+                    this.datameals.strIngredient12 +
+                    "," +
+                    this.datameals.strMeasure13 +
+                    "-" +
+                    this.datameals.strIngredient13 +
+                    "," +
+                    this.datameals.strMeasure14 +
+                    "-" +
+                    this.datameals.strIngredient14 +
+                    "," +
+                    this.datameals.strMeasure15 +
+                    "-" +
+                    this.datameals.strIngredient15 +
+                    "," +
+                    this.datameals.strMeasure16 +
+                    "-" +
+                    this.datameals.strIngredient16 +
+                    "," +
+                    this.datameals.strMeasure17 +
+                    "-" +
+                    this.datameals.strIngredient17 +
+                    "," +
+                    this.datameals.strMeasure18 +
+                    "-" +
+                    this.datameals.strIngredient18 +
+                    "," +
+                    this.datameals.strMeasure19 +
+                    "-" +
+                    this.datameals.strIngredient19 +
+                    "," +
+                    this.datameals.strMeasure20 +
+                    "-" +
+                    this.datameals.strIngredient20
+                )
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _c("span", [
+              _vm._v("Instructions :" + _vm._s(_vm.datameals.strInstructions))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "pxc-tags" }, [
+          _c("div", [_vm._v(_vm._s(_vm.datameals.strArea))]),
+          _vm._v(" "),
+          _c("div", [_vm._v(_vm._s(_vm.datameals.strTags))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "bottom-row" }, [
+          _c("div", { staticClass: "pxc-info" }, [
+            _c("div", { staticClass: "region" }, [
+              _vm._v(_vm._s(_vm.datameals.strArea))
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "content" },
+      [_c("youtube", { attrs: { "video-id": this.datameals.videoId } })],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$783232', $783232);
+          } else {
+            api.reload('$783232', $783232);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
+},{"_css_loader":"node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"view/main.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _content = _interopRequireDefault(require("../components/content"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 var _default = {
   name: "Main",
   props: ['datameals'],
+  components: {
+    DetailPage: _content.default
+  },
   data: function data() {
-    return {//    videoId: getIdFromURL(this.datameals.result.strYoutube),
+    return {
+      name: '' //    videoId: getIdFromURL(this.datameals.result.strYoutube),
       // ingredients:''
+
     };
   },
   methods: {
     signout: function signout() {
       this.$emit('logout');
+    },
+    random: function random() {
+      this.$emit('random');
+    },
+    search: function search() {
+      console.log('main', this.name);
+      this.$emit('search', this.name);
     }
   },
   created: function created() {
     console.log(this.datameals);
   },
   mounted: function mounted() {
-    console.log(this.datameals); //  console.log(this.datameals.result.strYoutube) 
-    //   this.ingredients = this.datameals.result.strMeasure1+'-'+ this.datameals.result.strIngredient1 +','+ 
-    //     this.datameals.result.strMeasure2+'-'+ this.datameals.result.strIngredient2 +','+
-    //      this.datameals.result.strMeasure3+'-'+ this.datameals.result.strIngredient3 +','+
-    //       this.datameals.result.strMeasure4+'-'+ this.datameals.result.strIngredient4 +','+
-    //        this.datameals.result.strMeasure5+'-'+ this.datameals.result.strIngredient5 +','+
-    //         this.datameals.result.strMeasure6+'-'+ this.datameals.result.strIngredient6 +','+
-    //          this.datameals.result.strMeasure7+'-'+ this.datameals.result.strIngredient7 +','+
-    //           this.datameals.result.strMeasure8+'-'+ this.datameals.result.strIngredient8 +','+
-    //            this.datameals.result.strMeasure9+'-'+ this.datameals.result.strIngredient9 +','+
-    //             this.datameals.result.strMeasure10+'-'+ this.datameals.result.strIngredient10 +','+
-    //              this.datameals.result.strMeasure11+'-'+ this.datameals.result.strIngredient11 +','+
-    //               this.datameals.result.strMeasure12+'-'+ this.datameals.result.strIngredient12 +','+
-    //                this.datameals.result.strMeasure13+'-'+ this.datameals.result.strIngredient13 +','+
-    //                 this.datameals.result.strMeasure14+'-'+ this.datameals.result.strIngredient14 +','+
-    //                  this.datameals.result.strMeasure15+'-'+ this.datameals.result.strIngredient15 +','+
-    //                   this.datameals.result.strMeasure16+'-'+ this.datameals.result.strIngredient16 +','+
-    //                    this.datameals.result.strMeasure17+'-'+ this.datameals.result.strIngredient17 +','+
-    //                     this.datameals.result.strMeasure18+'-'+ this.datameals.result.strIngredient18 +','+
-    //                      this.datameals.result.strMeasure19+'-'+ this.datameals.result.strIngredient19 +','+
-    //                       this.datameals.result.strMeasure20+'-'+ this.datameals.result.strIngredient20 
+    console.log(this.datameals);
   }
 };
 exports.default = _default;
@@ -11106,146 +11323,78 @@ exports.default = _default;
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "plx-card gold content" }, [
-      _c("div", {
-        staticClass: "pxc-bg",
-        style: {
-          "background-image": "url(" + _vm.datameals.result.strMealThumb + ")"
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "pxc-avatar" }, [
-        _c("img", { attrs: { src: _vm.datameals.result.strMealThumb } })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "pxc-stopper" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "pxc-subcard" }, [
-        _c("div", { staticClass: "pxc-title" }, [
-          _vm._v(_vm._s(_vm.datameals.result.strMeal))
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "pxc-sub" }, [
-          _vm._v(" " + _vm._s(_vm.datameals.result.strTags))
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "pxc-feats" }, [
-          _c("span", [
-            _vm._v(
-              "ingredients : " +
-                _vm._s(
-                  this.datameals.result.strMeasure1 +
-                    "-" +
-                    this.datameals.result.strIngredient1 +
-                    "," +
-                    this.datameals.result.strMeasure2 +
-                    "-" +
-                    this.datameals.result.strIngredient2 +
-                    "," +
-                    this.datameals.result.strMeasure3 +
-                    "-" +
-                    this.datameals.result.strIngredient3 +
-                    "," +
-                    this.datameals.result.strMeasure4 +
-                    "-" +
-                    this.datameals.result.strIngredient4 +
-                    "," +
-                    this.datameals.result.strMeasure5 +
-                    "-" +
-                    this.datameals.result.strIngredient5 +
-                    "," +
-                    this.datameals.result.strMeasure6 +
-                    "-" +
-                    this.datameals.result.strIngredient6 +
-                    "," +
-                    this.datameals.result.strMeasure7 +
-                    "-" +
-                    this.datameals.result.strIngredient7 +
-                    "," +
-                    this.datameals.result.strMeasure8 +
-                    "-" +
-                    this.datameals.result.strIngredient8 +
-                    "," +
-                    this.datameals.result.strMeasure9 +
-                    "-" +
-                    this.datameals.result.strIngredient9 +
-                    "," +
-                    this.datameals.result.strMeasure10 +
-                    "-" +
-                    this.datameals.result.strIngredient10 +
-                    "," +
-                    this.datameals.result.strMeasure11 +
-                    "-" +
-                    this.datameals.result.strIngredient11 +
-                    "," +
-                    this.datameals.result.strMeasure12 +
-                    "-" +
-                    this.datameals.result.strIngredient12 +
-                    "," +
-                    this.datameals.result.strMeasure13 +
-                    "-" +
-                    this.datameals.result.strIngredient13 +
-                    "," +
-                    this.datameals.result.strMeasure14 +
-                    "-" +
-                    this.datameals.result.strIngredient14 +
-                    "," +
-                    this.datameals.result.strMeasure15 +
-                    "-" +
-                    this.datameals.result.strIngredient15 +
-                    "," +
-                    this.datameals.result.strMeasure16 +
-                    "-" +
-                    this.datameals.result.strIngredient16 +
-                    "," +
-                    this.datameals.result.strMeasure17 +
-                    "-" +
-                    this.datameals.result.strIngredient17 +
-                    "," +
-                    this.datameals.result.strMeasure18 +
-                    "-" +
-                    this.datameals.result.strIngredient18 +
-                    "," +
-                    this.datameals.result.strMeasure19 +
-                    "-" +
-                    this.datameals.result.strIngredient19 +
-                    "," +
-                    this.datameals.result.strMeasure20 +
-                    "-" +
-                    this.datameals.result.strIngredient20
-                )
-            )
-          ]),
+    _c("div", { staticClass: "content" }, [
+      _c("form", { staticClass: "form-manual" }, [
+        _c("div", { staticClass: "form-row align-items-center " }, [
+          _c(
+            "label",
+            { staticClass: "sr-only text-white", attrs: { for: "name" } },
+            [_vm._v("Meals name :")]
+          ),
           _vm._v(" "),
-          _c("p", [
-            _c("span", [
-              _vm._v(
-                "Instructions :" + _vm._s(_vm.datameals.result.strInstructions)
-              )
-            ])
-          ])
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", id: "name", placeholder: "Meals Name" },
+            domProps: { value: _vm.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
+            }
+          })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "pxc-tags" }, [
-          _c("div", [_vm._v(_vm._s(_vm.datameals.result.strArea))]),
-          _vm._v(" "),
-          _c("div", [_vm._v(_vm._s(_vm.datameals.result.strTags))])
-        ]),
+        _c(
+          "button",
+          {
+            staticClass: "login100-form-btn form-manual",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.search($event)
+              }
+            }
+          },
+          [_vm._v("Search")]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "bottom-row" }, [
-          _c("div", { staticClass: "pxc-info" }, [
-            _c("div", { staticClass: "region" }, [
-              _vm._v(_vm._s(_vm.datameals.result.strArea))
-            ])
-          ])
-        ])
+        _c(
+          "button",
+          {
+            staticClass: "login100-form-btn form-manual",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.random($event)
+              }
+            }
+          },
+          [_vm._v("Random")]
+        )
       ])
     ]),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "content" },
-      [_c("youtube", { attrs: { "video-id": this.datameals.videoId } })],
+      _vm._l(_vm.datameals, function(detailmeals, idx) {
+        return _c("detail-page", {
+          key: idx,
+          attrs: { datameals: detailmeals }
+        })
+      }),
       1
     )
   ])
@@ -11283,7 +11432,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/vue-youtube-embed/lib/vue-youtube-embed.js":[function(require,module,exports) {
+},{"../components/content":"components/content.vue","_css_loader":"node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/vue-youtube-embed/lib/vue-youtube-embed.js":[function(require,module,exports) {
 var global = arguments[3];
 "use strict";
 
@@ -11601,11 +11750,28 @@ var _default = {
         method: "GET",
         url: "http://localhost:3000/"
       }).then(function (result) {
-        _this.mealsData = {
-          result: result.data.data.meals[0],
-          videoId: (0, _vueYoutubeEmbed.getIdFromURL)(result.data.data.meals[0].strYoutube)
-        };
-        console.log('****************', _this.mealsData);
+        result.data.data.meals.forEach(function (element) {
+          element.videoId = (0, _vueYoutubeEmbed.getIdFromURL)(element.strYoutube);
+        });
+        _this.mealsData = result.data.data.meals;
+      }).catch(function (err) {
+        Vue.toasted.global.my_app_error({
+          message: 'random meals fails'
+        });
+      });
+    },
+    searchmeals: function searchmeals(name) {
+      var _this2 = this;
+
+      console.log('APP', name);
+      (0, _axios.default)({
+        method: "GET",
+        url: "http://localhost:3000/findall/" + name
+      }).then(function (result) {
+        result.data.data.meals.forEach(function (element) {
+          element.videoId = (0, _vueYoutubeEmbed.getIdFromURL)(element.strYoutube);
+        });
+        _this2.mealsData = result.data.data.meals;
       }).catch(function (err) {
         Vue.toasted.global.my_app_error({
           message: 'random meals fails'
@@ -11663,7 +11829,11 @@ exports.default = _default;
         ? _c("landing", { on: { showmain: _vm.loginsucces } })
         : _c("main-page", {
             attrs: { datameals: _vm.mealsData },
-            on: { logout: _vm.logout }
+            on: {
+              logout: _vm.logout,
+              random: _vm.fetchMeal,
+              search: _vm.searchmeals
+            }
           })
     ],
     1
@@ -11822,7 +11992,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49818" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49745" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

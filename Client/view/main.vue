@@ -3,67 +3,50 @@
   <div>
       <button type="button" class="login100-form-btn " @click.prevent="signout"> Sign Out</button> 
   </div>
-<div class="plx-card gold content">        
-  <div class="pxc-bg" :style="{'background-image':'url('+datameals.result.strMealThumb+')'}"> </div>
-  <div class="pxc-avatar"><img :src= "datameals.result.strMealThumb"/></div>
-  <div class="pxc-stopper"> </div>
-  <div class="pxc-subcard">
-    <div class="pxc-title">{{datameals.result.strMeal}}</div>
-    <div class="pxc-sub"> {{datameals.result.strTags}}</div>
-    <div class="pxc-feats">
-        <span>ingredients : {{this.datameals.result.strMeasure1+'-'+ this.datameals.result.strIngredient1 +','+ 
-            this.datameals.result.strMeasure2+'-'+ this.datameals.result.strIngredient2 +','+
-             this.datameals.result.strMeasure3+'-'+ this.datameals.result.strIngredient3 +','+
-              this.datameals.result.strMeasure4+'-'+ this.datameals.result.strIngredient4 +','+
-               this.datameals.result.strMeasure5+'-'+ this.datameals.result.strIngredient5 +','+
-                this.datameals.result.strMeasure6+'-'+ this.datameals.result.strIngredient6 +','+
-                 this.datameals.result.strMeasure7+'-'+ this.datameals.result.strIngredient7 +','+
-                  this.datameals.result.strMeasure8+'-'+ this.datameals.result.strIngredient8 +','+
-                   this.datameals.result.strMeasure9+'-'+ this.datameals.result.strIngredient9 +','+
-                    this.datameals.result.strMeasure10+'-'+ this.datameals.result.strIngredient10 +','+
-                     this.datameals.result.strMeasure11+'-'+ this.datameals.result.strIngredient11 +','+
-                      this.datameals.result.strMeasure12+'-'+ this.datameals.result.strIngredient12 +','+
-                       this.datameals.result.strMeasure13+'-'+ this.datameals.result.strIngredient13 +','+
-                        this.datameals.result.strMeasure14+'-'+ this.datameals.result.strIngredient14 +','+
-                         this.datameals.result.strMeasure15+'-'+ this.datameals.result.strIngredient15 +','+
-                          this.datameals.result.strMeasure16+'-'+ this.datameals.result.strIngredient16 +','+
-                           this.datameals.result.strMeasure17+'-'+ this.datameals.result.strIngredient17 +','+
-                            this.datameals.result.strMeasure18+'-'+ this.datameals.result.strIngredient18 +','+
-                             this.datameals.result.strMeasure19+'-'+ this.datameals.result.strIngredient19 +','+
-                              this.datameals.result.strMeasure20+'-'+ this.datameals.result.strIngredient20 }}</span>
-        <p><span>Instructions :{{datameals.result.strInstructions}}</span></p>
-    </div>
-    <div class="pxc-tags">
-        <div>{{datameals.result.strArea}}</div>
-      <div>{{datameals.result.strTags}}</div>
-    </div>
-    <div class="bottom-row"> 
-      <div class="pxc-info">        
-        <div class="region">{{datameals.result.strArea}}</div>
+  <div class="content">
+    <form class ="form-manual">      
+      <div class="form-row align-items-center ">
+        <label for="name" class="sr-only text-white">Meals name :</label>
+        <input type="text" class="form-control" id="name" placeholder="Meals Name" v-model="name">
       </div>
-       </div>
+      <button type="button" class="login100-form-btn form-manual" @click.prevent="search">Search</button>
+      <button type="button" class="login100-form-btn form-manual" @click.prevent="random">Random</button>
+    </form>
   </div>
-</div>
-    <div class="content" >
-        <youtube :video-id="this.datameals.videoId"></youtube>
-    </div>
+  <div>
+    <detail-page v-for="(detailmeals,idx) in datameals " 
+    :key="idx" 
+    :datameals="detailmeals">
+    </detail-page>
+  </div>
 </div>
 </template>
 
 <script>
-
+import DetailPage from '../components/content'
 export default {
     name: "Main",
     props: ['datameals'],
+    components:{
+      DetailPage
+    },
     data () {
         return{
+          name:''
         //    videoId: getIdFromURL(this.datameals.result.strYoutube),
             // ingredients:''
         }        
     },
     methods: {
-        signout(){
+      signout(){
         this.$emit('logout')
+      },
+      random(){
+        this.$emit('random')
+      },
+      search(){
+        console.log('main',this.name);        
+        this.$emit('search',this.name)
       }
     },
     created () {
@@ -72,27 +55,6 @@ export default {
     },
     mounted () {
         console.log(this.datameals)
-        //  console.log(this.datameals.result.strYoutube) 
-        //   this.ingredients = this.datameals.result.strMeasure1+'-'+ this.datameals.result.strIngredient1 +','+ 
-        //     this.datameals.result.strMeasure2+'-'+ this.datameals.result.strIngredient2 +','+
-        //      this.datameals.result.strMeasure3+'-'+ this.datameals.result.strIngredient3 +','+
-        //       this.datameals.result.strMeasure4+'-'+ this.datameals.result.strIngredient4 +','+
-        //        this.datameals.result.strMeasure5+'-'+ this.datameals.result.strIngredient5 +','+
-        //         this.datameals.result.strMeasure6+'-'+ this.datameals.result.strIngredient6 +','+
-        //          this.datameals.result.strMeasure7+'-'+ this.datameals.result.strIngredient7 +','+
-        //           this.datameals.result.strMeasure8+'-'+ this.datameals.result.strIngredient8 +','+
-        //            this.datameals.result.strMeasure9+'-'+ this.datameals.result.strIngredient9 +','+
-        //             this.datameals.result.strMeasure10+'-'+ this.datameals.result.strIngredient10 +','+
-        //              this.datameals.result.strMeasure11+'-'+ this.datameals.result.strIngredient11 +','+
-        //               this.datameals.result.strMeasure12+'-'+ this.datameals.result.strIngredient12 +','+
-        //                this.datameals.result.strMeasure13+'-'+ this.datameals.result.strIngredient13 +','+
-        //                 this.datameals.result.strMeasure14+'-'+ this.datameals.result.strIngredient14 +','+
-        //                  this.datameals.result.strMeasure15+'-'+ this.datameals.result.strIngredient15 +','+
-        //                   this.datameals.result.strMeasure16+'-'+ this.datameals.result.strIngredient16 +','+
-        //                    this.datameals.result.strMeasure17+'-'+ this.datameals.result.strIngredient17 +','+
-        //                     this.datameals.result.strMeasure18+'-'+ this.datameals.result.strIngredient18 +','+
-        //                      this.datameals.result.strMeasure19+'-'+ this.datameals.result.strIngredient19 +','+
-        //                       this.datameals.result.strMeasure20+'-'+ this.datameals.result.strIngredient20 
     }
 }
 </script>
@@ -109,12 +71,16 @@ html {
 .container {
     display: flex;
     flex-direction:column;
-    justify-content: flex-end;
+    justify-content: flex-end;  
 }
 .content {
     border: white solid 2px;
     display: flex;
     justify-content: center;
+}
+.form-manual{
+ margin: 10px;
+ padding: 2px;
 }
 .plx-card {
   transition: all 600ms ease;

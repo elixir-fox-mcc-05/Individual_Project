@@ -1,7 +1,7 @@
 <template>
   <div>
       <landing @showmain="loginsucces" v-if="!islogin"></landing>
-      <main-page :datameals="mealsData" v-else @logout="logout"></main-page>
+      <main-page :datameals="mealsData" v-else @logout="logout" @random="fetchMeal" @search="searchmeals"></main-page>
   </div>
 </template>
 
@@ -36,11 +36,34 @@ export default {
 				method:"GET",
 				url:"http://localhost:3000/"
 			})
-			.then(result=>{		                
-                this.mealsData = {result:result.data.data.meals[0],
-            videoId: getIdFromURL(result.data.data.meals[0].strYoutube)}
-            console.log('****************',this.mealsData)
+			.then(result=>{	
+                result.data.data.meals.forEach(element =>{
+                    element.videoId = getIdFromURL(element.strYoutube)
+                    })
+                this.mealsData = result.data.data.meals
+                             
+                })            
+			.catch(err=>{
+				Vue.toasted.global.my_app_error({
+                    message : 'random meals fails'                   
+                });
+				
 			})
+        },
+        searchmeals(name) {
+            console.log('APP',name);
+            
+            axios({
+				method:"GET",
+                url:"http://localhost:3000/findall/"+name,
+                
+			})
+			.then(result=>{	
+                result.data.data.meals.forEach(element =>{
+                    element.videoId = getIdFromURL(element.strYoutube)
+                    })
+                this.mealsData = result.data.data.meals                             
+                })            
 			.catch(err=>{
 				Vue.toasted.global.my_app_error({
                     message : 'random meals fails'                   

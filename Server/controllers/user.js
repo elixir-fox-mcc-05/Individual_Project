@@ -167,5 +167,27 @@ class Controller{
         })
 
     }
+    static viewall(req,res){        
+        axios({
+            method: 'GET',
+            url: 'https://www.themealdb.com/api/json/v1/1/search.php?s='+req.params.name
+          })
+        .then(result=>{
+            console.log(result.data);
+            
+            return res.status(200).json({
+                msg:"find random success",
+                data:result.data
+            })
+        })
+        .catch(err=>{
+            console.log(err);            
+            return res.status(400).json({
+                msg:"find random fail",
+                data:err
+            })
+        })
+
+    }
 }
 module.exports = Controller

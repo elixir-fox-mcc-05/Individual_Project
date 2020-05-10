@@ -6,8 +6,8 @@
 
 ## Client URL :
 
-(status : active)
+https://client-pilem-yudhaaw96.firebaseapp.com/ (status : active)
 
 ## Server URL :
 
-(status : active)
+https://server-pilem-yudhaaw96.herokuapp.com/ (status : active)

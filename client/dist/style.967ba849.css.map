@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/css/style.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"style.967ba849.css","sourceRoot":"..","sourcesContent":["* {\n    padding: 0;\n    margin: 0;\n}\n\nbody {\n    background-color: black;\n    color: whitesmoke;\n}"]}

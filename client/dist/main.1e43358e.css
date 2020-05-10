@@ -1,0 +1,132 @@
+#loginPage {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 100;
+}
+
+#left , #rigth {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#logo {
+    margin-bottom: 30px;
+}
+
+#logoText {
+    font-size: 40px;
+}
+
+#signinTitle {
+    font-size: 50px;
+    font-weight: 100;
+    color: #ff004cff;
+}
+
+#formSignin {
+    width: 250px;
+}
+
+#formSignin input {
+    background-color: transparent;
+    border:none;
+    border-bottom: 1px solid whitesmoke;
+    font-size: 22px;
+    color: whitesmoke;
+}
+
+#formSignin input:focus {
+    border: none;
+    border-bottom: 1px solid #ff004cff;
+    outline: none;
+    box-shadow: none;
+}
+
+#formBox {
+    width: 250px;
+}
+#registerBox {
+    width: 250px;
+}
+#wraper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+#formSignup input {
+background-color: transparent;
+border:none;
+border-bottom: 1px solid whitesmoke;
+font-size: 22px;
+color: whitesmoke;
+}
+
+#formSignup input:focus {
+    border: none;
+    border-bottom: 1px solid #ff004cff;
+    outline: none;
+    box-shadow: none;
+}
+#topNav {
+    border-bottom: 0.1px solid gray ;
+}
+#card {
+    background-color:transparent;
+    width: 200px;
+    height: 200px;
+    font-size: 10px;
+    padding: 0;
+    margin-right: 20px;
+}
+
+#card-body{
+    padding: 15px 0 0 0;
+}
+h3 {
+    border-bottom: 1px solid gray;
+    padding-bottom:5px ;
+}
+
+#cardbox {
+    display: flex;
+    flex-direction: row;
+}
+
+#main {
+    background-color: rgb(15, 15, 15);
+    height: 90vh;
+    overflow: scroll;
+    padding-left: 30px;
+}
+
+#section {
+    margin-bottom: 100px;
+}
+#sidebar {
+    margin-top: 20px;
+}
+
+#sidebar button {
+    background-color: transparent;
+    border: none;
+}
+#sidebar button:focus {
+    outline: none;
+    box-shadow: none;
+    border-left: 10px solid #ff004cff;
+}
+
+.icon {
+    font-size: 20px;
+    margin-right: 15px;
+}

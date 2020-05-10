@@ -8,7 +8,7 @@
           <div class="card-body">
             <p class="text-dark">{{ PopularMovie.title }}</p>
             <p class="text-warning">{{ PopularMovie.vote_average }}</p>
-            <Detail :movieId="PopularMovie.id" :posterPathSmall="posterPathSmall"></Detail>
+            <Detail :serverUrl="serverUrl" :movieId="PopularMovie.id" :posterPathSmall="posterPathSmall"></Detail>
           </div>
         </div>
       </div>

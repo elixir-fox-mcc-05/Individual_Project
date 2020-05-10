@@ -12,7 +12,7 @@
           <div class="card-body">
             <p class="text-dark">{{ UpcomingMovie.title }}</p>
             <p class="text-warning">{{ UpcomingMovie.vote_average }}</p>
-            <Detail :movieId="UpcomingMovie.id" :posterPathSmall="posterPathSmall"></Detail>
+            <Detail :serverUrl="serverUrl" :movieId="UpcomingMovie.id" :posterPathSmall="posterPathSmall"></Detail>
           </div>
         </div>
       </div>

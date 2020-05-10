@@ -58,7 +58,7 @@ import axios from "axios";
 
 export default {
   name: "Detail",
-  props: ["movieId", "posterPathSmall"],
+  props: ["serverUrl", "movieId", "posterPathSmall"],
   data() {
     return {
       DetailMovie: ""
@@ -68,7 +68,7 @@ export default {
     detail(movieId) {
       axios({
         method: "get",
-        url: "http://localhost:3000/movies/" + this.movieId,
+        url: this.serverUrl + "/movies/" + this.movieId,
         headers: {
           access_token: localStorage.getItem("access_token")
         }

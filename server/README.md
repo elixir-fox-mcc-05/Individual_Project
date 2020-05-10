@@ -24,15 +24,17 @@
         Content : {
                 "Anime": [
                 {
-                "id": 1,
-                "title": "Boku No Hero Academia",
-                "released_date": "2015-05-15",
-                "genre": "School, Comedy, Supranatural",
-                "rating": 8.5,
-                "url": "https://www.imdb.com/title/tt5626028/",
+                "id": 7,
+                "title": "Kingdom 3rd Season",
+                "mal_id": 40682,
+                "genre": "",
+                "rating": 8.6,
+                "image_url": "https://cdn.myanimelist.net/images/anime/1332/106392.jpg?s=d111827d6fa7f273acee0c511d88c735",
+                "url": "https://myanimelist.net/anime/40682/Kingdom_3rd_Season",
+                "status": false,
                 "UserId": 1,
-                "createdAt": "2020-05-09T11:30:57.779Z",
-                "updatedAt": "2020-05-09T11:30:57.779Z",
+                "createdAt": "2020-05-10T02:02:20.358Z",
+                "updatedAt": "2020-05-10T04:41:03.779Z",
                 "User": {
                         "id": 1,
                         "name": "User Name",
@@ -87,9 +89,10 @@
 
         ```
         title : string
-        released_date : date
+        mal_id : date
         genre : string
         rating : integer
+        image_url : string
         url : string
         ```
 
@@ -99,15 +102,17 @@
         code : 201
         content : {
                 "Anime": {
-                    "id": 1,
-                    "title": "Boku No Hero Academia",
-                    "released_date": "2015-05-15",
-                    "genre": "School, Comedy, Supranatural",
-                    "rating": 8.5,
-                    "url": "https://www.imdb.com/title/tt5626028/",
-                    "UserId": 1,
-                    "updatedAt": "2020-05-09T11:30:57.779Z",
-                    "createdAt": "2020-05-09T11:30:57.779Z"
+                        "id": 7,
+                        "title": "Kingdom 3rd Season",
+                        "mal_id": 40682,
+                        "genre": "",
+                        "rating": 8.6,
+                        "image_url": "https://cdn.myanimelist.net/images/anime/1332/106392.jpg?s=d111827d6fa7f273acee0c511d88c735",
+                        "url": "https://myanimelist.net/anime/40682/Kingdom_3rd_Season",
+                        "status": false,
+                        "UserId": 1,
+                        "createdAt": "2020-05-10T02:02:20.358Z",
+                        "updatedAt": "2020-05-10T04:41:03.779Z",
                 }
         }
         ```
@@ -166,15 +171,17 @@
         code : 200
         content : {
                 "Anime": {
-                    "id": 1,
-                    "title": "Boku No Hero Academia",
-                    "released_date": "2015-05-15",
-                    "genre": "School, Comedy, Supranatural",
-                    "rating": 8.5,
-                    "url": "https://www.imdb.com/title/tt5626028/",
-                    "UserId": 1,
-                    "updatedAt": "2020-05-09T11:30:57.779Z",
-                    "createdAt": "2020-05-09T11:30:57.779Z"
+                        "id": 7,
+                        "title": "Kingdom 3rd Season",
+                        "mal_id": 40682,
+                        "genre": "",
+                        "rating": 8.6,
+                        "image_url": "https://cdn.myanimelist.net/images/anime/1332/106392.jpg?s=d111827d6fa7f273acee0c511d88c735",
+                        "url": "https://myanimelist.net/anime/40682/Kingdom_3rd_Season",
+                        "status": false,
+                        "UserId": 1,
+                        "createdAt": "2020-05-10T02:02:20.358Z",
+                        "updatedAt": "2020-05-10T04:41:03.779Z",
                 }
         }
         ```
@@ -244,7 +251,7 @@
             type : "post",
             success : function(result) {
                 res.status(200).json({
-                    Anime : result
+                    msg : String
                 })
             }
         });
@@ -417,3 +424,119 @@
                 }
         })
         ```
+
+### Register User
+
+*       Url : 
+        
+        /user/register
+
+*       Method :
+        
+        "post"
+
+*       Url Params :
+
+        None
+
+*       Data Params : 
+
+        ```
+        Name : string,
+        email : string,
+        password: string,
+        confirmPassword : string
+        ```
+
+*       Succes Response : 
+
+        ```
+        code: 200
+        content : {
+                "Id" = 1
+                "email" = "your email"
+        }
+        ```
+
+*       error Response :
+        
+        ```
+        code : 500
+        content : 
+                Something Went Wrong
+        ```
+
+*       Sample Call : 
+
+        ```
+        axios({
+                url : '/user/register'
+                method : 'post'
+                data : {
+                        name,
+                        email,
+                        password
+                }
+                onSucces : function(result){
+                        res.status(500).json({
+                                User : user
+                        })
+                }
+        })
+        ```
+
+*       Update Watched Anime
+
+        Url : 
+
+        /anime/:id
+
+        methods :
+
+        "put"
+
+        Url Params :
+
+                ```
+                "token"
+                ```
+
+        Data Params :
+
+                ```
+                status : boolean
+                ```
+
+        OnSucces :
+
+                ```
+                Code : 200
+                Content : {
+                        Anime : {
+                                status : true
+                        }
+                }
+                ```
+        
+        On Failed :
+
+                ```
+                code:500
+                content : {
+                        "Something Went Wrong"
+                }
+
+        Sample Call :
+
+                ```
+                axios({
+                        url : anime/:2
+                        method : "put"
+                        header : {
+                                token
+                        } OnSucces(function(result) => {
+                                res.status(200).json({
+                                        json
+                                })
+                        })
+                })

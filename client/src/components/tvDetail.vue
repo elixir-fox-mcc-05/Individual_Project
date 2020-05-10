@@ -5,7 +5,7 @@
                 <img :src="imgUrl">
             </div>
             <div class="col s12 m8" id="detailInfo">
-                <h4>{{detail.name}}</h4>
+                <h4 class="center">{{detail.name}}</h4>
                 <p>Overview</p>
                 <p class="light">{{detail.overview}}</p>
                 <p>Homepage</p>

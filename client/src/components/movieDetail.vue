@@ -5,7 +5,7 @@
                 <img :src="imgUrl">
             </div>
             <div class="col s12 m8" id="detailInfo">
-                <h4>{{detail.title}}</h4>
+                <h4 class="center">{{detail.title}}</h4>
                 <p>Overview</p>
                 <p class="light">{{detail.overview}}</p>
                 <p>Homepage</p>
@@ -33,7 +33,7 @@ export default {
         return {
             imdbUrl: `https://www.imdb.com/title/${this.detail.imdb_id}`,
             imgUrl: `https://image.tmdb.org/t/p/w500${this.detail.poster_path}`,
-            backdropPath: `https://image.tmdb.org/t/p/w500${this.detail.backdrop_path}`
+            backdropPath: `https://image.tmdb.org/t/p/original${this.detail.backdrop_path}`
         }
     },
     methods: {

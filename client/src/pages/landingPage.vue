@@ -59,7 +59,12 @@
                 <div class="row">
                     <div class="col m4 center valign-wrapper">
                         <div class="container center">
-                            <h5>Log In with Google</h5>
+                            <g-signin-button class="btn" role="button"
+                                :params="googleSignInParams"
+                                @success="onSignInSuccess"
+                                @error="onSignInError">
+                                Login with Google
+                            </g-signin-button>
                         </div>
                     </div>
                     <div class="col m8">
@@ -99,6 +104,9 @@ export default {
             user: {
                 email: '',
                 password: ''
+            },
+            googleSignInParams: {
+                client_id: '557406035263-2ldagcb0gsnm6vfqeo74auda3puaqb54.apps.googleusercontent.com'
             }
         }
     },
@@ -106,6 +114,13 @@ export default {
         loginUser() {
             let user = this.user
             this.$emit('loginUser', user)
+        },
+        onSignInSuccess (googleUser) {
+            this.$emit('success', googleUser)
+        },
+
+        onSignInError (error) {
+            this.$emit('error', error)
         }
     }
 }

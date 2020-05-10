@@ -3,6 +3,8 @@
         <div v-if="currentPage == 'landingPage'">
             <landingPage
                 @loginUser="loginUser"
+                @success="onSignInSuccess"
+                @error="onSignInError"
                 :currentPage="currentPage"
             >
 
@@ -261,7 +263,35 @@ export default {
                 this.tvNowPlaying.page = page
                 this.fetchNowPlayingTvSeries()
             }
-        }
+        },
+        onSignInSuccess (googleUser) {
+            const profile = googleUser.getBasicProfile()
+            let name = profile.getName()
+            let email = profile.getEmail()
+            let id_token = googleUser.getAuthResponse().id_token;
+            axios({
+                method: 'get',
+                url: `${this.baseUrl}/users/google-login`,
+                headers: {
+                    google_token: id_token,
+                    name,
+                    email,
+                }
+            })
+                .then(response => {
+                    localStorage.setItem('token', response.data.token)
+                    localStorage.setItem('currentUserId', response.data.user.id)
+                    localStorage.setItem('currentUserName', response.data.user.name)
+                    this.currentPage = "dashboardPage"
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        },
+
+        onSignInError (error) {
+            console.log('OH NOES', error)
+        },
     },
     created() {
         if(localStorage.token) {

@@ -3,7 +3,7 @@ const userRouter = require('./user.js');
 const animeRouter = require('./anime.js');
 
 router.get('/', (req, res) => {
-  res.json(200).json({
+  res.status(200).json({
     message: `Anime Apps API`
   });
 });

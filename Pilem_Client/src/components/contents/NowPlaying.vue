@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3 class="alert alert-dark" role="alert">Now Playing in Theathers</h3>
+    <h3 class="alert alert-dark" role="alert">Now Playing in Theaters</h3>
     <div class="row flex-row flex-nowrap scroll">
       <div class="col-2" v-for="NowPlayingMovie in NowPlayingMovies" :key="NowPlayingMovie.id">
         <div class="card card-block">

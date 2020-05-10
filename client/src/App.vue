@@ -1,31 +1,50 @@
 <template>
     <div>
-        <b-container fluid>
-            <b-row class="my-1" v-for="type in types" :key="type">
-                <b-col sm="3">
-                    <label :for="`type-${type}`">Type <code>{{ type }}</code>:</label>
-                </b-col>
-                <b-col sm="9">
-                    <b-form-input :id="`type-${type}`" :type="type"></b-form-input>
-                </b-col>
-            </b-row>
-    </b-container>
+        <Jumbotron></Jumbotron>
+        <LoginPage
+            v-if="page == 'loginPage'"
+            @toMainPageFromLoginPage="toMainPage"
+        ></LoginPage>
+        <MainPage
+            v-if="page == 'mainPage'"
+        ></MainPage>
     </div>
 </template>
 
 <script>
+import Jumbotron from './components/Jumbotron'
+import LoginPage from './components/LoginPage'
+import MainPage from './components/MainPage'
 export default {
-    data() {
+    name: 'App',
+    components: {
+        Jumbotron, LoginPage, MainPage
+    },
+    data (){
         return {
-            types: [
-                'email',
-                'password'
-            ]
+            page: 'loginPage'
+        }
+    },
+    methods: {
+        toMainPage(){
+            this.page = 'mainPage'
+        }
+    },
+    created() {
+        if(localStorage.token) {
+            this.page = 'mainPage'
         }
     }
 }
 </script>
 
 <style>
-
+     body {
+        background-image: url(../assets/audio-e-guitars-guitars-music-6966.jpg);
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        -moz-background-size: cover;
+        background-position: center; 
+    }
 </style>

@@ -48,6 +48,16 @@
               <input type="submit" class="btn btn-primary" value="Sign Me Up" />
             </div>
           </form>
+          <div
+            v-if="signUpSuccess"
+            class="alert alert-success"
+            role="alert"
+          >{{ signUpSuccessMessage }}</div>
+          <div
+            v-if="signUpFailed"
+            class="alert alert-warning"
+            role="alert"
+          >{{ signUpFailedMessage }}</div>
         </div>
       </div>
     </div>
@@ -58,14 +68,17 @@
 import axios from "axios";
 
 export default {
-  name: "SignUp",
+  name: "signUp",
   props: ["serverUrl"],
   data() {
     return {
       signUpName: "",
       signUpEmail: "",
       signUpPassword: "",
-      signUpSuccess: false
+      signUpSuccess: false,
+      signUpSuccessMessage: "",
+      signUpFailed: false,
+      signUpFailedMessage: ""
     };
   },
   methods: {
@@ -80,11 +93,27 @@ export default {
         }
       })
         .then(data => {
-          console.log(data.data);
           this.signUpSuccess = true;
+          this.signUpFailed = false;
+          this.signUpSuccessMessage = `Nice ${data.data.CreatedUser.name}, Sign Up success..! your email : ${data.data.CreatedUser.email}"`;
+          this.signUpFailedMessage = "";
+          this.signUpName = "";
+          this.signUpEmail = "";
+          this.signUpPassword = "";
         })
         .catch(err => {
-          console.log(err);
+          this.signUpSuccess = false;
+          this.signUpFailed = true;
+          this.signUpFailedMessage = "";
+          let manyError = Array.isArray(err.response.data.message);
+          if (manyError) {
+            for (let i = 0; i < err.response.data.message.length; i++) {
+              this.signUpFailedMessage +=
+                "!-- " + err.response.data.message[i]["message"] + " ";
+            }
+          } else {
+            this.signUpFailedMessage += "!-- " + err.response.data.message;
+          }
         });
     }
   }

@@ -39,6 +39,11 @@
               <input type="submit" class="btn btn-primary" value="Sign Me In" />
             </div>
           </form>
+          <div
+            v-if="signInFailed"
+            class="alert alert-warning"
+            role="alert"
+          >{{ signInFailedMessage }}</div>
         </div>
       </div>
     </div>
@@ -55,12 +60,13 @@ export default {
     return {
       signInEmail: "",
       signInPassword: "",
-      signInSuccess: false
+      signInFailed: false,
+      signInFailedMessage: ""
     };
   },
   methods: {
     auth() {
-      this.$emit("auth")
+      this.$emit("auth");
     },
     signin() {
       axios({
@@ -72,13 +78,28 @@ export default {
         }
       })
         .then(data => {
-          this.signInSuccess = true;
-          localStorage.setItem("access_token", data.data.access_token)
+          this.signInFailed = false;
+          this.signInFailedMessage = "";
+          this.signInEmail = "";
+          this.signInPassword = "";
+          localStorage.setItem("access_token", data.data.access_token);
           $("#signin").modal("hide");
-          this.auth()
+          this.auth();
         })
         .catch(err => {
-          console.log(err);
+          this.signInFailed = true;
+          this.signInFailedMessage = "";
+          this.signInEmail = "";
+          this.signInPassword = "";
+          let manyError = Array.isArray(err.response.data.message);
+          if (manyError) {
+            for (let i = 0; i < err.response.data.message.length; i++) {
+              this.signInFailedMessage +=
+                "!-- " + err.response.data.message[i]["message"] + " ";
+            }
+          } else {
+            this.signInFailedMessage += "!-- " + err.response.data.message;
+          }
         });
     }
   }

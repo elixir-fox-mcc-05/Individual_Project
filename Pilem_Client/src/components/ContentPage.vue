@@ -1,8 +1,35 @@
 <template>
   <div class="container content-page bgdark">
-    <NowPlaying :serverUrl="serverUrl" :posterPath="posterPath" :posterPathSmall="posterPathSmall" @auth="auth"></NowPlaying><br />
-    <Popular :serverUrl="serverUrl" :posterPath="posterPath" :posterPathSmall="posterPathSmall" @auth="auth"></Popular><br />
-    <Upcoming :serverUrl="serverUrl" :posterPath="posterPath" :posterPathSmall="posterPathSmall" @auth="auth"></Upcoming>
+    <div class="jumbotron">
+      <h5 class="display-4 text-danger">Pilem,</h5>
+      <p class="lead text-dark">
+        Now playing, popular, upcoming movies and more to discover. Explore now.
+      </p>
+      <hr class="my-2" />
+      <p class="text-dark">
+        API Provided by TheMovieDatabase.
+      </p>
+    </div>
+    <NowPlaying
+      :serverUrl="serverUrl"
+      :posterPath="posterPath"
+      :posterPathSmall="posterPathSmall"
+      @auth="auth"
+    ></NowPlaying>
+    <br />
+    <Popular
+      :serverUrl="serverUrl"
+      :posterPath="posterPath"
+      :posterPathSmall="posterPathSmall"
+      @auth="auth"
+    ></Popular>
+    <br />
+    <Upcoming
+      :serverUrl="serverUrl"
+      :posterPath="posterPath"
+      :posterPathSmall="posterPathSmall"
+      @auth="auth"
+    ></Upcoming>
   </div>
 </template>
 

@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "ahmadalhq",
+    "password": "empatpuluh6",
+    "database": "individual_project",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}

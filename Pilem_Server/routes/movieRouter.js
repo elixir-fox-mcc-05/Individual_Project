@@ -8,5 +8,6 @@ router.use(authentication);
 router.get('/nowplaying', MovieController.nowPlaying);
 router.get('/popular', MovieController.popular);
 router.get('/upcoming', MovieController.upcoming);
+router.get('/:movieId', MovieController.detail);
 
 module.exports = router;

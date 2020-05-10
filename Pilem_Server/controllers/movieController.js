@@ -43,6 +43,20 @@ class MovieController {
 				next(err);
 			});
 	}
+
+	static detail(req, res, next) {
+		let params = req.params.movieId;
+		axios
+			.get(link + params + api_key + languange)
+			.then((data) => {
+				res.status(200).json({
+					DetailMovie: data.data
+				});
+			})
+			.catch((err) => {
+				next(err);
+			});
+	}
 }
 
 module.exports = MovieController;

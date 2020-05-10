@@ -3,7 +3,7 @@
         <!-- navbar -->
         <nav class="mb-1 navbar navbar-expand-md navbar-dark unique-color" style="background-color: turquoise;" id="front-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="">KamVan Board</a>
+                <a class="navbar-brand" href="">Makan Apa App</a>
                 <ul class="navbar-nav mr-aut">
                     <li class="nav-item" v-if="!isLogin">
                         <a class="nav-link waves-effect waves-light" v-on:click.prevent='registerForm'>Register</a>
@@ -12,10 +12,10 @@
                         <a class="nav-link waves-effect waves-light" v-on:click.prevent='loginForm'>Login</a>
                     </li>
                     <li class="nav-item" v-if="isLogin">
-                        <a class="nav-link waves-effect waves-light" >Random Food Recipe</a>
+                        <a class="nav-link waves-effect waves-light" v-on:click.prevent='randomFoodPage'>Random Food Recipe</a>
                     </li>
                     <li class="nav-item" v-if="isLogin">
-                        <a class="nav-link waves-effect waves-light" >Restaurant List</a>
+                        <a class="nav-link waves-effect waves-light" v-on:click.prevent='restaurantsPage'>Restaurant List</a>
                     </li>
                     <li class="nav-item" v-if="isLogin">
                         <a class="nav-link waves-effect waves-light" v-on:click.prevent="logout">Logout</a>
@@ -69,8 +69,8 @@
         </div>
         <!-- register -->
 
-        <!-- dashboard -->
-        <div class="container-md" id="dashboard" v-if="isLogin">
+        <!-- restaurant page -->
+        <div class="container-xl" id="restaurant-page" v-if="isLogin && currentPage == 'restaurant-page' ">
             <div>
                 <p>{{errMsg}}</p>
             </div>
@@ -94,9 +94,9 @@
                 </div>
             </div>
         </div>
-        <!-- dashboard -->
+        <!-- restaurant page -->
 
-        <!-- Modal -->
+        <!-- restaurant modal detail -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -116,8 +116,19 @@
                 </div>
             </div>
         </div>
-        <!--  -->
+        <!-- restaurant modal detail -->
 
+        <!-- random food page -->
+        <div class="container-xl" id="random-food-page" v-if="isLogin && currentPage == 'random-food'">
+            <div>
+                <p>{{errMsg}}</p>
+            </div>
+            <h1>Random Food Recipe</h1>
+            <div class="container-md" v-for="food in randomFood" :key="food.id">
+                {{food.meals}}
+            </div>
+        </div>
+        <!-- random food page -->
 
     </div>
 </template>
@@ -141,12 +152,20 @@ export default {
   },
     methods: {
         registerForm() {
-            this.isLogin = false
-            this.currentPage = 'register-form'
+            this.isLogin = false;
+            this.currentPage = 'register-form';
         },
         loginForm() {
-            this.isLogin = false
-            this.currentPage = 'login-form'
+            this.isLogin = false;
+            this.currentPage = 'login-form';
+        },
+        restaurantsPage() {
+            this.isLogin = true;
+            this.currentPage = 'restaurant-page';
+        },
+        randomFoodPage() {
+            this.isLogin = true;
+            this.currentPage = 'random-food-page';
         },
         register() {
             let config = {
@@ -218,7 +237,7 @@ export default {
             axios.get('http://localhost:3000/data/wtc', config)
                 .then(result => {
                     console.log(result)
-                    this.randomFood = result.food
+                    this.randomFood = result.result.data
                 })
                 .catch(err => {
                     setTimeout(() => {

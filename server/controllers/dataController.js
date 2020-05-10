@@ -28,7 +28,12 @@ class DataController {
                     let temp = {
                         name: data[i].restaurant.name,
                         address: data[i].restaurant.location.address,
-                        img: data[i].restaurant.featured_image
+                        img: data[i].restaurant.featured_image,
+                        type: data[i].restaurant.cuisines,
+                        timings: data[i].restaurant.timings,
+                        averagePrice: data[i].restaurant.average_cost_for_two,
+                        ratings: data[i].restaurant.user_rating,
+                        etc: data[i].restaurant.highlights,
                     }
                     restaurantList.push(temp)
                 }

@@ -1,0 +1,33 @@
+#tab[data-v-1c9b7e] {
+  margin-left: auto;
+  margin-right: auto;
+}
+nav[data-v-04d428] {
+  margin-top: 2vw;
+}
+p[data-v-04d428] {
+  margin-top: 4vw;
+  margin-left: 22vw;
+  margin-right: 22vw;
+}
+form[data-v-adeeaa] {
+  display: flex;
+  justify-content: center;
+}
+nav[data-v-adeeaa] {
+  margin-top: 2vw;
+}
+#btn[data-v-adeeaa] {
+  margin-left: 1vw;
+}
+#input-song[data-v-adeeaa] {
+  margin-left: 1vw;
+}
+* {
+  margin: auto;
+  text-align: center;
+}
+h1[data-v-7d2fb3] {
+  text-align: center;
+  font-size: 15vw;
+}

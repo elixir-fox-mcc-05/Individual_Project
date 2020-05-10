@@ -7,6 +7,7 @@ const {authentication} = require('../middleware/authentication.js')
 //User
 router.post('/users/register', UserController.register);
 router.post('/users/login', UserController.logIn);
+router.post('/users/googleLogin', UserController.googleLogin);
 //Movie
 router.use(authentication)
 router.get('/movies/action', MovieController.getAction);

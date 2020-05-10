@@ -2,6 +2,7 @@ const Model = require('../models')
 const User = Model.User
 const {checkPassword} = require('../helpers/bcrypt.js')
 const {generateToken} = require('../helpers/jwt.js')
+const verifyGoogle = require('../helpers/googleOAuth.js')
 
 
 class UserController {
@@ -53,7 +54,36 @@ class UserController {
             .catch(err => {
                 next(err)
             })
-        }    
+        }
+
+        static googleLogin(req, res, next) {
+            let googleToken = req.headers.id_token;
+            let payload;
+            verifyGoogle(googleToken)
+                .then(data => {
+                    payload = data;
+                    return User.findOne({ where : { email : payload.email } })
+                })
+                .then(result => {
+                    if(result){
+                        return result
+                    }else{
+                        return User.create({ email : payload.email, password : process.env.SECRET })
+                    }
+                })
+                .then(user =>{
+                    let token = generateToken({
+                        id: user.id,
+                        email : user.email
+                    })
+                    res.status(200).json({ token })
+                })
+                
+                .catch(err =>{
+                    console.log(err)
+                })
+        }
+    
 }
 
 module.exports = UserController;

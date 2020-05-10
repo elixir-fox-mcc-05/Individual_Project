@@ -29,6 +29,7 @@
                 :key="player.id"
                 :player="player"
                 @create="create"
+                @refresh="$emit('reset')"
             >
             </PlayerCard>
         </div>
@@ -68,7 +69,7 @@ export default {
                     })
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$emit('error', err);
                 })
         },
         getNFLPlayer(team, position) {
@@ -86,7 +87,7 @@ export default {
                     })
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$emit('error', err);
                 })
         },
         create(newPlayer) {

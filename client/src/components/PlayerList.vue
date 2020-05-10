@@ -5,11 +5,14 @@
             :teams="teams"
             @team="getId"
             @reset="$emit('reset')"
+            @error="error"
         >
         </OwnedPlayer>
         <FetchedPlayer
             ref="fetch"
             @create="addPlayer"
+            @error="error"
+            @reset="$emit('reset')"
         >
         </FetchedPlayer>
         
@@ -57,13 +60,18 @@ export default {
                 }
             })
                 .then(res => {
-                    console.log(res);
                     this.$refs.owned.getPlayer(this.teamId);
-
+                    this.$emit('reset');
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$emit('error', err);
                 })
+        },
+        resetList() {
+            this.$refs.owned.resetMyTeam();
+        },
+        error(err) {
+            this.$emit('error', err);
         }
     } 
 }

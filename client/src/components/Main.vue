@@ -1,5 +1,10 @@
 <template>
 <div class="topped">
+    <Error
+        v-if="errorDetected"
+        :alertMessage="alertMessage"
+    >
+    </Error>
     <div class="d-flex justify-content-between main">
         <h2>Gridiron Fantasy Team Builder</h2> 
         <button class="btn btn-nfl-blue" @click="toggleAddForm">Add New Team</button>
@@ -9,6 +14,7 @@
         :myteam="myteam"
         @showMine="showMyTeam"
         @showAll="showAllTeam"
+        @error="showError"
     ></AddForm>
     <div>
         <ul class="team-container">
@@ -29,6 +35,7 @@
         :teams="myTeams"
         ref="player"
         @reset="reset"
+        @error="showError"
     ></PlayerList>
     <Modal
         :class="{'modal-active': modalActive}"
@@ -38,7 +45,9 @@
         :bench="bench"
         :deleted="deleted"
         @reset="reset"
+        @clear="clear"
         @cancel="cancel"
+        @error="showError"
     >
     </Modal>
 </div>
@@ -49,12 +58,13 @@ import AddForm from './Add';
 import TeamList from './TeamList';
 import PlayerList from './PlayerList';
 import Modal from './Modal';
+import Error from './Error';
 import axios from 'axios';
 
 export default {
     name: 'Main',
     components: {
-        AddForm, TeamList, PlayerList, Modal
+        AddForm, TeamList, PlayerList, Modal, Error
     },
     data() {
         return {
@@ -67,7 +77,9 @@ export default {
             deleted: '',
             starter: [],
             bench: [],
-            teamName: ''
+            teamName: '',
+            errorDetected: false,
+            alertMessage: ''
         }
     },
     methods: {
@@ -92,7 +104,7 @@ export default {
                 this.$refs.player.triggerGetTeam();
             })
             .catch(err => {
-                console.log(err);
+                this.showError(err);
             })
         },
         showAllTeam() {
@@ -110,7 +122,7 @@ export default {
                 this.myteam = false;
             })
             .catch(err => {
-                console.log(err);
+                this.showError(err);
             })
         },
         triggerWarn(id) {
@@ -143,6 +155,33 @@ export default {
                 this.showAllTeam();
             }
             this.cancel();
+            
+        },
+        clear() {
+            this.$refs.player.resetList();
+        },
+        noError() {
+            this.errorDetected = false;
+            this.alertMessage = '';
+        },
+        processError(err) {
+            this.errorDetected = true;
+            if(Array.isArray(err.response.data.error)) {
+                let errors = '';
+                err.response.data.error.forEach(e =>  {
+                    errors += `${e}, `
+                })
+                this.alertMessage = errors.substring(0, errors.length-2);
+            } else {
+                this.alertMessage = err.response.data.error;
+            }
+        },
+        showError(err) {
+                setTimeout(() => {
+                this.noError();
+            }, 3000);
+            this.cancel();
+            this.processError(err);
         }
     },
     created() {

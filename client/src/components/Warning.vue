@@ -25,11 +25,11 @@ export default {
             })
                 .then(res => {
                     this.$emit('reset');
+                    this.$emit('clear');
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$emit('error', err);
                     this.$emit('reset');
-
                 })
         }
     }

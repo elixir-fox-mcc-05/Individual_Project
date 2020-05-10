@@ -7,7 +7,7 @@
             <i class="fas fa-trash-alt" @click="triggerDeletion(team.id)"></i>
         </div>
         <div class="team-owner">
-            Manager: {{ team.User.name }}
+            Manager: {{ team.User.username }}
         </div>
         <div class="team-size">
             <p>Team Size: {{ team.number_of_player }} of 14</p>
@@ -43,6 +43,9 @@ export default {
         margin: 5px;
         padding: 5px;
         border-radius: 5px;
+        -webkit-box-shadow: -2px 10px 23px -8px rgba(0,0,0,0.75);
+        -moz-box-shadow: -2px 10px 23px -8px rgba(0,0,0,0.75);
+        box-shadow: -2px 10px 23px -8px rgba(0,0,0,0.75);
     }
 
     .team-name {

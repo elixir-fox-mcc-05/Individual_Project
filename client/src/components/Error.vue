@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
     .alert {
-        margin: 8px;
+        margin: 3px;
         padding: 2px;
         text-align: center;
     }

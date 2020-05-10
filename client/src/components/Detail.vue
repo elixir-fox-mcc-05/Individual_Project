@@ -4,14 +4,14 @@
             <h3>{{ teamName }}</h3>
         </div>
         <div class="starter">
-            <h3>starter</h3>
+            <h3>Start</h3>
             <MiniCard
              v-for='player in starter' :key="player.id" :player="player"
             >
             </MiniCard>
         </div>
         <div class="bench">
-            <h3>bench</h3>
+            <h3>Sit</h3>
             <MiniCard
              v-for='player in bench' :key="player.id" :player="player"
             >

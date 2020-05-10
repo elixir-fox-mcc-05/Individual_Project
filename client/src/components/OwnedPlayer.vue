@@ -11,6 +11,7 @@
                 :player="player" 
                 :owned="owned" 
                 @refresh="refresh"
+                @error="error"
             ></PlayerCard>
         </div>
     </div>
@@ -48,18 +49,25 @@ export default {
                 })
             })
             .catch(err => {
-                console.log(err);
+                this.$emit('error', err);
             })
         },
         refresh() {
+            console.log('refresh');
             this.getPlayer(this.myTeam);
             this.$emit('reset');
+        },
+        resetMyTeam() {
+            this.myTeam = '';
+        },
+        error(err) {
+            this.$emit('error', err);
         }
     },
     watch: {
         myTeam(id) {
             this.getPlayer(id);
-            this.$emit('team', id)
+            this.$emit('team', id);
         }
     }
 }

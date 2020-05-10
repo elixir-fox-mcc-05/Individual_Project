@@ -43,11 +43,10 @@ export default {
                 }
             })
                 .then(res => {
-                    console.log(res);
                     this.$emit('refresh');
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$emit('error', err);
                 })
         }
     }
@@ -64,6 +63,9 @@ export default {
         margin: 5px;
         padding: 5px;
         border-radius: 5px;
+        -webkit-box-shadow: -2px 10px 23px -8px rgba(0,0,0,0.75);
+        -moz-box-shadow: -2px 10px 23px -8px rgba(0,0,0,0.75);
+        box-shadow: -2px 10px 23px -8px rgba(0,0,0,0.75);
     }
 
     .player-position {

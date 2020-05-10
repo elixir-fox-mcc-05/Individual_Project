@@ -21,12 +21,7 @@ export default {
     components: {
         Register, Login
     },
-    props: ['registered'],
-    data() {
-        return {
-            
-        }
-    }
+    props: ['registered']
 }
 </script>
 

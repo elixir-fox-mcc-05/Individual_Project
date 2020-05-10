@@ -106,11 +106,31 @@ export default {
                 })
                 .catch(err => {
                     this.errorDetected = true;
-                    this.alertMessage = err;
+                    if(Array.isArray(err.response.data.error)) {
+                        let errors = '';
+                        err.response.data.error.forEach(e =>  {
+                            errors += `${e}, `
+                        })
+                        this.alertMessage = errors.substring(0, errors.length-2);
+                    } else {
+                        this.alertMessage = err.response.data.error;
+                    }
                 })
         },
         onSignInError (error) {
             console.log(error);
+        }
+    },
+    watch: {
+        registered(val) {
+            if(!val) {
+                this.registrationName = '';
+                this.registrationUsername = '';
+                this.registrationEmail = '';
+                this.registrationPassword = '';
+                this.errorDetected = false;
+                this.alertMessage = '';
+            }
         }
     }
 }

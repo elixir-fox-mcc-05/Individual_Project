@@ -41,16 +41,7 @@ export default {
                     }
                 })
                 .catch(err => {
-                    this.errorDetected = true;
-                    if(Array.isArray(err.response.data.error)) {
-                        let errors = '';
-                        err.response.data.error.forEach(e =>  {
-                            errors += `${e}, `
-                        })
-                        this.alertMessage = errors.substring(0, errors.length-2);
-                    } else {
-                        this.alertMessage = err.response.data.error;
-                    }
+                    this.$emit('error', err);
                 })
         }
     }

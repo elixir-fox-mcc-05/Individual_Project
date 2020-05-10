@@ -30,11 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         is: {
           args: /^\w+$/gi,
-          msg: 'Team name can only contain alphanumeric letter and underscore'
+          msg: 'username can only contain alphanumeric letter and underscore'
         },
         len: {
           args: [8],
-          msg: 'Team name must be at least 8 character long'
+          msg: 'username must be at least 8 character long'
         }
       }
     },
@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      vaidate: {
+      validate: {
         len: {
           args: [8],
           msg: 'password must be 8 characters or longer'

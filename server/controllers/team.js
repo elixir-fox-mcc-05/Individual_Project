@@ -25,7 +25,12 @@ class TeamController{
 
         Team
             .findAll({
-                include: [User, Player]
+                include: [{
+                    model: User,
+                    attributes: {exclude: ['password']}
+                },{
+                    model: Player
+                }]
             })
             .then(teams => {
                 res.status(200).json({
@@ -45,7 +50,12 @@ class TeamController{
                 where: {
                     UserId
                 },
-                include: [User, Player]
+                include: [{
+                    model: User,
+                    attributes: {exclude: ['password']}
+                },{
+                    model: Player
+                }]
             })
             .then(teams => {
                 res.status(200).json({

@@ -65,6 +65,16 @@ export default {
                 }
             })
         }
+    },
+    watch: {
+        registered(val) {
+            if(val) {
+                this.loginEmail = '';
+                this.loginPassword = '';
+                this.errorDetected = false;
+                this.alertMessage = '';
+            }
+        }
     }
 }
 </script>

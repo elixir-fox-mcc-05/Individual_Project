@@ -12,6 +12,8 @@
             :deleted="deleted"
             @reset="$emit('reset')"
             @cancel="$emit('cancel')"
+            @clear="$emit('clear')"
+            @error="error"
         ></Warn>
     </div>
 </template>
@@ -22,9 +24,14 @@ import Warn from './Warning';
 
 export default {
     name: 'Modal',
-    props: ['content', 'detail', 'starter', 'bench', 'teamName'],
+    props: ['content', 'detail', 'starter', 'bench', 'teamName', 'deleted'],
     components: {
         Detail, Warn
+    },
+    methods: {
+        error(err) {
+            this.$emit('error', err);
+        }
     }
 }
 </script>

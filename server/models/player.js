@@ -8,19 +8,39 @@ module.exports = (sequelize, DataTypes) => {
   Player.init({
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Player\'s name can\'t be empty'
+        }
+      }
     },
     position: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Player\'s position can\'t be empty'
+        }
+      }
     },
     team: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Player\'s team can\'t be empty'
+        }
+      }
     },
     status: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Player\'s status can\'t be empty'
+        }
+      }
     },
     TeamId: {
       type: DataTypes.INTEGER,
@@ -92,6 +112,24 @@ module.exports = (sequelize, DataTypes) => {
               throw(err);
             })
         }
+      },
+      duplicationCheck() {
+        const { models } = sequelize;
+
+        return models.Team
+            .findByPk(this.TeamId, {
+              include: [models.Player]
+            })
+            .then(team => {
+              team.Players.forEach(player => {
+                if(player.name === this.name && player.position === this.position && player.team === this.team) {
+                  throw('This player already member of your team');
+                }
+              })
+            })
+            .catch(err => {
+              throw(err);
+            })
       }
     },
     hooks: {

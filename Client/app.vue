@@ -34,7 +34,7 @@ export default {
         fetchMeal() {
             axios({
 				method:"GET",
-				url:"http://localhost:3000/"
+				url:"https://g-meals.herokuapp.com/"
 			})
 			.then(result=>{	
                 result.data.data.meals.forEach(element =>{
@@ -55,7 +55,7 @@ export default {
             
             axios({
 				method:"GET",
-                url:"http://localhost:3000/findall/"+name,
+                url:"https://g-meals.herokuapp.com/findall/"+name,
                 
 			})
 			.then(result=>{	

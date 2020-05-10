@@ -18,7 +18,16 @@ Vue.use(VueYouTubeEmbed)
 // // Initialize Firebase
 // firebase.initializeApp(firebaseConfig);
 
-
+const firebaseConfig = {
+    apiKey: "AIzaSyB-cpbSSro9yKlQOPxt9KIpI8UM8J0zCwI",
+    authDomain: "g-meals.firebaseapp.com",
+    databaseURL: "https://g-meals.firebaseio.com",
+    projectId: "g-meals",
+    storageBucket: "g-meals.appspot.com",
+    messagingSenderId: "153391692602",
+    appId: "1:153391692602:web:fac8fce3f94b29cd842e03"
+  };
+  
 new Vue({    
     GoogleSignInButton,
     render: h => h(App)

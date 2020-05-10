@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const PORT = 3000
+const PORT = process.env.PORT
 const controllerUser = require('./controllers/user')
 const googleverify = require('./middlewares/googleVerify')
 

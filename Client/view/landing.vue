@@ -50,7 +50,7 @@ export default {
 		login(){
 			axios({
 				method:"POST",
-				url:"http://localhost:3000/login",
+				url:"https://g-meals.herokuapp.com/login",
 				data:{
 					email:this.email,
 					password:this.password
@@ -73,7 +73,7 @@ export default {
 		  console.log('test');		  
 		  axios({
 				method:"POST",
-				url:"http://localhost:3000/gmaillogin",
+				url:"https://g-meals.herokuapp.com/gmaillogin",
 				headers:{
 					token:idToken
 				}

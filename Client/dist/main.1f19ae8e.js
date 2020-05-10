@@ -10711,7 +10711,7 @@ var _default = {
 
       (0, _axios.default)({
         method: "POST",
-        url: "http://localhost:3000/login",
+        url: "https://g-meals.herokuapp.com/login",
         data: {
           email: this.email,
           password: this.password
@@ -10732,7 +10732,7 @@ var _default = {
       console.log('test');
       (0, _axios.default)({
         method: "POST",
-        url: "http://localhost:3000/gmaillogin",
+        url: "https://g-meals.herokuapp.com/gmaillogin",
         headers: {
           token: idToken
         }
@@ -11748,7 +11748,7 @@ var _default = {
 
       (0, _axios.default)({
         method: "GET",
-        url: "http://localhost:3000/"
+        url: "https://g-meals.herokuapp.com/"
       }).then(function (result) {
         result.data.data.meals.forEach(function (element) {
           element.videoId = (0, _vueYoutubeEmbed.getIdFromURL)(element.strYoutube);
@@ -11766,7 +11766,7 @@ var _default = {
       console.log('APP', name);
       (0, _axios.default)({
         method: "GET",
-        url: "http://localhost:3000/findall/" + name
+        url: "https://g-meals.herokuapp.com/findall/" + name
       }).then(function (result) {
         result.data.data.meals.forEach(function (element) {
           element.videoId = (0, _vueYoutubeEmbed.getIdFromURL)(element.strYoutube);
@@ -11958,6 +11958,15 @@ _vue.default.use(_vueYoutubeEmbed.default); // var firebaseConfig = {
 // firebase.initializeApp(firebaseConfig);
 
 
+var firebaseConfig = {
+  apiKey: "AIzaSyB-cpbSSro9yKlQOPxt9KIpI8UM8J0zCwI",
+  authDomain: "g-meals.firebaseapp.com",
+  databaseURL: "https://g-meals.firebaseio.com",
+  projectId: "g-meals",
+  storageBucket: "g-meals.appspot.com",
+  messagingSenderId: "153391692602",
+  appId: "1:153391692602:web:fac8fce3f94b29cd842e03"
+};
 new _vue.default({
   GoogleSignInButton: _vueGoogleSigninButtonDirective.default,
   render: function render(h) {
@@ -11992,7 +12001,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49745" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51711" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

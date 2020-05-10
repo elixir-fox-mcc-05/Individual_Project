@@ -1,9 +1,9 @@
 <template>
     <div>
         <!-- NAVBAR -->
-        <NavbarSection>
-
-        </NavbarSection>
+        <NavbarSection 
+            :currentPage="currentPage"
+        ></NavbarSection>
 
         <!-- SLIDER -->
         <div class="slider" id="sliderLandingPage">
@@ -11,43 +11,43 @@
                 <li>
                     <img src="../../img/titleSlider/1.jpg">
                     <div class="caption left-align">
-                        <h3 class="grey-text text-lighten-3">This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                        <h3 class="grey-text text-lighten-3">Welcome to MUVI!</h3>
+                        <h5 class="light grey-text text-lighten-3">your primary source of happiness</h5>
                     </div>
                 </li>
                 <li>
                     <img src="../../img/titleSlider/2.jpg">
                     <div class="caption right-align">
-                        <h3 class="grey-text text-lighten-3">This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                        <h3 class="grey-text text-lighten-3">Audrey Hepburn</h3>
+                        <h5 class="light grey-text text-lighten-3">“Everything I learned I learned from the movies.”</h5>
                     </div>
                 </li>
                 <li>
                     <img src="../../img/titleSlider/3.jpg">
                     <div class="caption left-align">
-                        <h3 class="grey-text text-lighten-3">This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                        <h3 class="grey-text text-lighten-3">Anthony Burgess</h3>
+                        <h5 class="light grey-text text-lighten-3">“It's funny how the colors of the real world only seem really real when you watch them on a screen.”</h5>
                     </div>
                 </li>
                 <li>
                     <img src="../../img/titleSlider/4.jpg">
                     <div class="caption right-align">
-                        <h3 class="grey-text text-lighten-3">This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                        <h3 class="grey-text text-lighten-3">Roger Ebert</h3>
+                        <h5 class="light grey-text text-lighten-3">“It's not what a movie is about, it's how it is about it.”</h5>
                     </div>
                 </li>
                 <li>
                     <img src="../../img/titleSlider/5.jpg">
                     <div class="caption left-align">
-                        <h3 class="grey-text text-lighten-3">This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                        <h3 class="grey-text text-lighten-3">Martin Scorsese</h3>
+                        <h5 class="light grey-text text-lighten-3">“Cinema is a matter of what's in the frame and what's out”</h5>
                     </div>
                 </li>
                 <li>
                     <img src="../../img/titleSlider/6.jpg">
                     <div class="caption right-align">
-                        <h3 class="grey-text text-lighten-3">This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                        <h3 class="grey-text text-lighten-3">Maria Tusar</h3>
+                        <h5 class="light grey-text text-lighten-3">"Film is a great tool to play with human emotions and thoughts"</h5>
                     </div>
                 </li>
             </ul>
@@ -72,7 +72,7 @@
                             <input id="password" v-model="user.password" type="password" class="validate" required>
                             <label for="password">Password</label>
                         </div>
-                        <button type="submit" class="btn blue darken-3" @click.prevent="loginUser">Login</button>
+                        <button type="submit" class="btn blue darken-3" @click="loginUser">Login</button>
                     </div>
                 </div>
             </div>
@@ -93,6 +93,7 @@ export default {
     components: {
         NavbarSection, FooterSection
     },
+    props: ['currentPage'],
     data() {
         return {
             user: {

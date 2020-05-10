@@ -1,8 +1,9 @@
 <template>
     <div class="grey darken-4 white-text">
-        <NavbarSection>
-
-        </NavbarSection>
+        <NavbarSection
+            @logoutUser="logoutUser"
+            :currentPage="currentPage"
+        ></NavbarSection>
 
         <!-- Main Section -->
         <div v-if="currentSection == 'mainSection'" class="center">
@@ -51,6 +52,12 @@
                     <button class="btn" @click.prevent="changeSection('listSection', 'nowPlayingTv')">Now Playing</button>
                 </div>
             </div>
+        </div>
+
+        <!-- See-Detail -->
+        <div v-if="detail">
+            <movieDetail v-if="code == 'movie'" :detail="detail"></movieDetail>
+            <tvDetail v-else-if="code == 'tv'" :detail="detail"></tvDetail>
         </div>
 
         <!-- ListSection -->
@@ -139,12 +146,6 @@
             </div>
         </div>
         
-        <!-- See-Detail -->
-        <div v-if="detail">
-            <movieDetail v-if="code == 'movie'" :detail="detail"></movieDetail>
-            <tvDetail v-else-if="code == 'tv'" :detail="detail"></tvDetail>
-        </div>
-
         <FooterSection>
 
         </FooterSection>
@@ -171,7 +172,8 @@ export default {
         'tvPopular',
         'tvTopRated',
         'tvNowPlaying',
-        'baseUrl'
+        'baseUrl',
+        'currentPage'
     ],
     data() {
         return {
@@ -209,6 +211,9 @@ export default {
                 .catch(err => {
                     console.log(err)
                 })
+        },
+        logoutUser() {
+            this.$emit('logoutUser')
         }
     }
 }

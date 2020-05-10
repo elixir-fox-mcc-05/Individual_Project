@@ -3,6 +3,7 @@
         <div v-if="currentPage == 'landingPage'">
             <landingPage
                 @loginUser="loginUser"
+                :currentPage="currentPage"
             >
 
             </landingPage>
@@ -16,6 +17,8 @@
                 :tvTopRated="tvTopRated"
                 :tvNowPlaying="tvNowPlaying"
                 :baseUrl='baseUrl'
+                :currentPage="currentPage"
+                @logoutUser="logoutUser"
             >
 
             </dashboardPage>
@@ -224,6 +227,10 @@ export default {
                 .catch(err => {
                     console.log(err)
                 })
+        },
+        logoutUser() {
+            localStorage.clear()
+            this.currentPage = 'landingPage'
         }
     },
     created() {

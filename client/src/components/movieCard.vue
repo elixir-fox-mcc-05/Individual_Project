@@ -23,28 +23,9 @@ export default {
         }
     },
     methods: {
-        // getDetail() {
-        //     axios({
-        //         method: 'get',
-        //         url: `${this.baseUrl}/dashboard/${code}/${this.list.id}`,
-        //         headers: {
-        //             token: localStorage.token
-        //         }
-        //     })
-        //         .then(response => {
-        //             console.log(response.data.Detail)
-        //             this.detail = response.data.Detail
-        //         })
-        //         .catch(err => {
-        //             console.log(err)
-        //         })
-        // }
         seeDetail(list) {
             this.$emit('seeDetail', list)
         }
-    },
-    created() {
-        // this.getDetail()
     }
 }
 </script>

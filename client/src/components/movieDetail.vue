@@ -18,8 +18,6 @@
                 <p class="light">{{detail.runtime}} Minutes</p>
                 <p>Original Language</p>
                 <p class="light">{{detail.original_language}}</p>
-                <p>Tagline</p>
-                <p class="light">{{detail.tagline}}</p>
             </div>
         </div>
     </div>

@@ -9,15 +9,16 @@
                 <p>Overview</p>
                 <p class="light">{{detail.overview}}</p>
                 <p>Homepage</p>
-                <p class="light">{{detail.homepage}}</p>
-                <p>IMDb</p>
-                <p class="light">{{imdbUrl}}</p>
-                <p>Release Date</p>
-                <p class="light">{{detail.release_date}}</p>
+                <a class="light" :href="detail.homepage">Link</a>
                 <p>Duration</p>
                 <p class="light">{{detail.runtime}} Minutes</p>
                 <p>Original Language</p>
                 <p class="light">{{detail.original_language}}</p>
+                <p>Episodes</p>
+                <p class="light">{{detail.number_of_episodes}}</p>
+                <p>Seasons</p>
+                <p class="light">{{detail.number_of_seasons}}</p>
+
             </div>
         </div>
     </div>

@@ -3,18 +3,6 @@
             <div class="container">
                 <a @click.prevent="nothing" class="navbar-brand" href="">Moviz<i class="fas fa-play-circle ml-2"></i> </a>
                 <ul class="navbar-nav">
-                    <!-- <li v-show="isLogin" class="nav-item">
-                        <a @click.prevent="$emit('showTvPopular')" class="nav-link" href="">TV Popular</a>
-                    </li>
-                    <li v-show="isLogin" class="nav-item">
-                        <a @click.prevent="$emit('showTvTopRated')" class="nav-link" href="">TV Top Rated</a>
-                    </li> -->
-                    <!-- <li v-show="isLogin" class="nav-item">
-                        <a @click.prevent="$emit('showMoviePopular')" class="nav-link" href="">Movie Popular</a>
-                    </li>
-                    <li v-show="isLogin" class="nav-item">
-                        <a @click.prevent="$emit('showMovieTopRated')" class="nav-link" href="">Movie Top Rated</a>
-                    </li> -->
                     <li v-show="!isLogin" class="nav-item">
                         <a @click.prevent="$emit('showRegister')" class="nav-link" href="">Register</a>
                     </li>
@@ -38,6 +26,10 @@
                     <li v-show="isLogin" class="nav-item">
                         <a @click.prevent="$emit('logout')" class="nav-link" href="">Logout</a>
                     </li>
+                    <form v-show="isLogin" class="form-inline my-2 my-lg-0">
+                        <input type="text" class="form-control mr-sm-2" placeholder="Search" v-model="searchItem">
+                        <button @click.prevent="searchMovie" class="btn btn-outline-secondary my-2 my-sm-0">Search</button>
+                    </form>
                 </ul>
             </div>
         </nav>
@@ -47,8 +39,32 @@
 export default {
     name: "Navbar",
     props: ['isLogin'],
+    data() {
+        return {
+            searchItem: ''
+        }
+    },
     methods: {
-        nothing() {}
+        nothing() {},
+        searchMovie() {
+            const axios = require('axios');
+            axios.post('http://localhost:3000/tv/search', {
+                title: this.searchItem
+            }, {
+                headers: {
+                    token: localStorage.token
+                }
+            })
+            .then(user => {
+                const { data } = user
+                this.$emit('getSearchResult', data);
+            })
+            .catch(err => {
+                err = err.response
+                let { data } = err;
+                console.log(data)            
+            })
+        }
     }
 }
 </script>

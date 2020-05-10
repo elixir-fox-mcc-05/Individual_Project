@@ -9,6 +9,7 @@
             @showTvTopRated="showTvTopRated"
             @showMoviePopular="showMoviePopular"
             @showMovieTopRated="showMovieTopRated"
+            @getSearchResult="getSearchResult"
         ></navbar>
 
         <register :currentPage="currentPage" @changeToLogin="changeToLogin"></register>
@@ -22,6 +23,9 @@
             </div>
         </div>
 
+        <search :movie="searchResult"></search>
+
+
     </div>
 </template>
 
@@ -30,6 +34,7 @@ import navbar from "./components/Navbar";
 import card from "./components/Card";
 import register from "./components/Register";
 import login from "./components/Login";
+import search from "./components/Search";
 
 export default {
     name: 'App',
@@ -37,7 +42,8 @@ export default {
         navbar,
         card,
         register,
-        login
+        login,
+        search
     }, 
     data() {
         return {
@@ -45,7 +51,7 @@ export default {
             isLogin: '',
             movies: [],
             title: '',
-            showToggle: true
+            searchResult: ''
         }
     },
     methods: {
@@ -190,6 +196,11 @@ export default {
             this.movies = [];
             this.title = 'Top Rated Movies';
             this.fetchMovieTopRated();
+        },
+        getSearchResult(input) {
+            this.searchResult = input;
+            console.log(this.searchResult);
+            this.currentPage = 'search';
         }
     },
     created() {

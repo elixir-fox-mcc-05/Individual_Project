@@ -8,9 +8,7 @@
                   <h1 class="text-center">Welcome to Movie Reel</h1>
                   <p class="lead text-muted text-center">Keep a tab on the latest movies playing now on local theaters, or spot community-voted favorites according to various genres!</p>
                   <hr/>
-                  <!-- <div style="max-width:100%; background-color:#2ecc71; color:white; border-radius:5px; padding:0px 5px;" v-if="successMessage">
-                    <p v-if="successMessage">{{successMessage}}</p>
-                  </div> -->
+                  <button class="btn btn-danger" @click="logout">Log out</button>
                   <form class="justify-content-center"  @submit.prevent="login()">
                       <label class="control-label" for="loginEmail">Email:</label>
                       <input type="email" class="form-control" id="loginEmail" v-model="user.loginEmail">
@@ -18,6 +16,8 @@
                       <input type="password" class="form-control" id="loginPassword" v-model="user.loginPassword"><br>
                       <button type="submit" class="btn btn-success" style="width:100%;">Log in</button>
                   </form><br>
+                  <hr/>
+                  <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
                   <!-- <div style="display:flex;justify-content:flex-end;">
                     <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure" style="width:100%;">Login with Google</GoogleLogin>
                   </div> -->
@@ -32,14 +32,27 @@
 
 <script>
 import axios from 'axios'
+import GoogleLogin from 'vue-google-login';
+
 
 export default {
   name:'loginPage',
+  components:{
+      GoogleLogin
+  },
   data(){
       return {
         user:{
           loginEmail:"",
           loginPassword:""
+        },
+        params: {
+            client_id: "136588575165-5upkmennr92id074u842e92l6a5ihc60.apps.googleusercontent.com"
+        },
+        renderParams: {
+            width: 250,
+            height: 50,
+            longtitle: true
         }
     }
   },
@@ -69,6 +82,34 @@ export default {
         .catch(error =>{
           console.log(error)
         })
+    },
+    onSuccess(googleUser) {
+        // console.log(googleUser);
+      // This only gets the user information: id, name, imageUrl and email
+      let id_token = googleUser.getAuthResponse().id_token;
+      axios({
+        method: 'POST',
+        url: 'http://localhost:3000/googleSign',
+        data: {
+          id_token
+        }
+      })
+      .then(result =>{
+        localStorage.setItem("access_token", result.data.access_token)
+        this.changePage('dashboard')
+      })
+      .catch(error =>{
+        console.log(error)
+      })
+      
+    },
+    logout(){
+      localStorage.clear()
+      var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+      });
+      this.changePage('loginPage')
     }
   }
 }

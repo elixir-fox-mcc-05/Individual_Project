@@ -13,22 +13,6 @@
                       :key="movie.id" 
                       :movie="movie"></movieCard>
                     </div>
-                    <!-- <div id="taskCategory" class="row">
-                        <taskCategory 
-                        v-for="taskCategory in categories" 
-                        :key="taskCategory.id" 
-                        :allTasks="allTasks" 
-                        :taskCategory="taskCategory"
-                        @changePage="changePage"
-                        @refetchAllTasks="fetchAllTasks"
-                        @setSelectedTaskId="setSelectedTaskId"
-                        ></taskCategory>
-                    </div> -->
-                    <!-- <taskCategory
-                    :allTasks="allTasks"> -->
-                      <!-- <taskCard 
-                      :allTasks="allTasks1"></taskCard> -->
-                    <!-- </taskCategory> -->
                 </div>  
             </div>
         </div>
@@ -80,10 +64,10 @@ export default {
     },  
     logout(){
         localStorage.clear()
-        // var auth2 = gapi.auth2.getAuthInstance();
-        // auth2.signOut().then(function () {
-        //   console.log('User signed out.');
-        // });
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
         this.changePage('loginPage')
     }
   },

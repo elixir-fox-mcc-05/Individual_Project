@@ -8,8 +8,13 @@
     ></Navbar>
     <h2 class="text-center mt-3">Ghibli's Anime Movie List</h2>
     <h3 v-if="search" class="text-center">Search Result for: {{ search }}</h3>
-    <span v-if="successMessage"></span>
-    <AnimeList :animes="animes" @addUserFavorite="addUserFavorite" :userAnime="userAnime"></AnimeList>
+    <AnimeList
+      :animes="animes"
+      @addUserFavorite="addUserFavorite"
+      @removeUserFavorite="removeUserFavorite"
+      :userAnime="userAnime"
+      :successMessage="successMessage"
+    ></AnimeList>
   </div>
 </template>
 
@@ -44,6 +49,9 @@ export default {
     },
     addUserFavorite(id) {
       this.$emit("addUserFavorite", id);
+    },
+    removeUserFavorite(id) {
+      this.$emit("removeUserFavorite", id);
     }
   }
 };

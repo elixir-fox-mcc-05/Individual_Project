@@ -32,6 +32,25 @@ class AnimeController {
         return next(err);
       });
   }
+  static removeFavorite(req, res, next) {
+    let UserId = req.UserId;
+    let AnimeId = req.params.id;
+
+    UserAnime.destroy({
+      where: {
+        UserId,
+        AnimeId
+      }
+    })
+      .then(data => {
+        res.status(200).json({
+          message: 'Successfully removed favorite'
+        });
+      })
+      .catch(err => {
+        return next(err);
+      });
+  }
 }
 
 module.exports = AnimeController;

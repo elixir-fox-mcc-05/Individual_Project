@@ -25,6 +25,7 @@
       @showDashboard="showDashboard"
       @logout="logout"
       @addUserFavorite="addUserFavorite"
+      @removeUserFavorite="removeUserFavorite"
     ></DashboardPage>
   </div>
 </template>
@@ -47,7 +48,7 @@ export default {
       page: "login",
       errorMessage: "",
       successMessage: "",
-      baseUrl: "http://localhost:3000",
+      baseUrl: "https://arcane-atoll-26284.herokuapp.com",
       animes: [],
       userAnime: [],
       logged_in: false,
@@ -114,6 +115,28 @@ export default {
           console.log(err.response);
         });
     },
+    removeUserFavorite(id) {
+      axios
+        .delete(
+          `${this.baseUrl}/anime/favorite/${id}`,
+          {},
+          {
+            headers: {
+              token: this.token
+            }
+          }
+        )
+        .then(response => {
+          this.successMessage = `Removed from your favorite!`;
+          setTimeout(() => {
+            this.successMessage = "";
+          }, 5000);
+          this.fetchUserFavorite();
+        })
+        .catch(err => {
+          console.log(err.response);
+        });
+    },
     register(userData) {
       axios
         .post(`${this.baseUrl}/register`, userData)
@@ -153,9 +176,13 @@ export default {
         });
     },
     logout() {
-      this.logged_in = false;
-      localStorage.clear();
-      this.showLogin();
+      let auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(() => {
+        this.logged_in = false;
+        localStorage.clear();
+        this.showLogin();
+        this.errorMessage = "";
+      });
     },
     onSignIn(googleUser) {
       const id_token = googleUser.getAuthResponse().id_token;

@@ -6,7 +6,7 @@
         <span>{{ errorMessage }}</span>
       </div>
       <div class="text-success" id="successMessage" v-if="successMessage">
-        <span>{{ successMessage }}</span>
+        <p style="color: green;">{{ successMessage }}</p>
       </div>
       <form @submit.prevent="login">
         <div class="form-group">
@@ -33,21 +33,17 @@
         <button type="submit" class="btn btn-primary">Login</button>
       </form>
       <p class="mt-3">Or Login Using</p>
-      <GoogleLogin
-        :params="params"
-        :renderParams="renderParams"
-        :onSuccess="onSignIn"
-      ></GoogleLogin>
+      <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSignIn"></GoogleLogin>
       <p class="mt-2">
         Dont have an account?
-        <a href="" @click.prevent="showRegister">Register</a>
+        <a href @click.prevent="showRegister">Register</a>
       </p>
     </div>
   </div>
 </template>
 
 <script>
-import GoogleLogin from 'vue-google-login';
+import GoogleLogin from "vue-google-login";
 export default {
   components: {
     GoogleLogin
@@ -58,11 +54,11 @@ export default {
   },
   data() {
     return {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       params: {
         client_id:
-          '933063756617-e8kgkdk30jqda15abpsqaj1od0d5cbbh.apps.googleusercontent.com'
+          "933063756617-e8kgkdk30jqda15abpsqaj1od0d5cbbh.apps.googleusercontent.com"
       },
       renderParams: {
         width: 75,
@@ -77,13 +73,13 @@ export default {
         email: this.email,
         password: this.password
       };
-      this.$emit('login', userData);
+      this.$emit("login", userData);
     },
     onSignIn(googleUser) {
-      this.$emit('onSignIn', googleUser);
+      this.$emit("onSignIn", googleUser);
     },
     showRegister() {
-      this.$emit('showRegister');
+      this.$emit("showRegister");
     }
   }
 };

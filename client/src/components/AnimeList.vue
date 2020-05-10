@@ -6,7 +6,9 @@
           :anime="anime"
           :index="index"
           @addUserFavorite="addUserFavorite"
+          @removeUserFavorite="removeUserFavorite"
           :userAnime="userAnime"
+          :successMessage="successMessage"
         ></AnimeCard>
       </div>
     </div>
@@ -23,11 +25,15 @@ export default {
   },
   props: {
     animes: Array,
-    userAnime: Array
+    userAnime: Array,
+    successMessage: String
   },
   methods: {
     addUserFavorite(id) {
       this.$emit("addUserFavorite", id);
+    },
+    removeUserFavorite(id) {
+      this.$emit("removeUserFavorite", id);
     }
   }
 };

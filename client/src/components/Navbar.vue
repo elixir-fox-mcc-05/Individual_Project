@@ -9,9 +9,6 @@
         <li class="nav-item active">
           <a class="nav-link" href @click.prevent="showDashboard">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href @showMyList="showMyList">My List</a>
-        </li>
       </ul>
       <form class="form-inline my-2 my-lg-0" @submit.prevent="searchAnime">
         <input

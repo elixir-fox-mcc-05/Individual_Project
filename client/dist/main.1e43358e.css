@@ -80,6 +80,39 @@ color: whitesmoke;
 #topNav {
     border-bottom: 0.1px solid gray ;
 }
+#playlistCard{
+ width: 200px;
+ height: 200px;
+ /* background-image: url('https://picsum.photos/200?grayscale&blur=2'); */
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ color: #ff004cff;
+ margin-right: 20px;
+}
+#playlistCover{
+    padding: 0 0 0 30px;
+    background-color: rgb(15, 15, 15);
+    height: 90vh;
+}
+
+#playlistInput {
+    background: transparent;
+    border: none;
+    border-bottom:1px solid gray  ;
+    color: whitesmoke;
+}
+
+#playlistInput:focus {
+    border-bottom:1px solid #ff004cff  ;
+    box-shadow: none;
+}
+
+#noPlaylist {
+    margin-top:250px ;
+    text-align: center;
+    color: gray;
+}
 #card {
     background-color:transparent;
     width: 200px;

@@ -10,7 +10,10 @@
                 <homeTab></homeTab>
             </section>
             <section v-if="displayPage=='playlist'">
-                <playlist></playlist>
+                <playlist
+                    :playlistData="playlistData"
+                    @playlistBtn="playlistBtn"
+                ></playlist>
             </section>
         </div>
     </div>
@@ -27,7 +30,8 @@ export default {
     data() {
         return {
             displayPage:'home',
-            baseUrl : 'http://localhost:3000'
+            baseUrl : 'http://localhost:3000',
+            playlistData : [],
         }
     },
     components : {
@@ -39,10 +43,18 @@ export default {
             this.displayPage = 'playlist'
             axios({
                 method : 'get',
-                url : this.baseUrl+'/playlist'
+                url : this.baseUrl+'/playlist',
+                headers : {
+                    token : localStorage.getItem('token')
+                }
             })
-            .then(result=>{
-                console.log(result)
+            .then(arr=>{
+                let newArr = []
+                arr.data.result.forEach(element => {
+                    element.imgUrl = 'https://picsum.photos/200?grayscale&blur=2'
+                    newArr.push(element)
+                });
+                this.playlistData = newArr
             })
             .catch(err=>{
                 console.log(err)

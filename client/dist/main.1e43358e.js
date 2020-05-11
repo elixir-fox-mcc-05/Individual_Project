@@ -11457,7 +11457,8 @@ exports.default = void 0;
 //
 //
 var _default = {
-  name: "playlistCard"
+  name: "playlistCard",
+  props: ['playlist']
 };
 exports.default = _default;
         var $e9f32f = exports.default || module.exports;
@@ -11472,16 +11473,11 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "card", attrs: { id: "playlistCard" } }, [
+    _c("h4", [_vm._v(_vm._s(_vm.playlist.name))])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("ini playlistCard")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -11524,6 +11520,8 @@ exports.default = void 0;
 
 var _playlistCard = _interopRequireDefault(require("./playlistCard"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //
@@ -11532,10 +11530,64 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   name: "playlist",
+  props: ['playlistData'],
+  data: function data() {
+    return {
+      title: ''
+    };
+  },
   components: {
     playlistCard: _playlistCard.default
+  },
+  methods: {
+    addPlaylist: function addPlaylist() {
+      var _this = this;
+
+      (0, _axios.default)({
+        method: 'post',
+        url: 'http://localhost:3000/playlist',
+        data: {
+          name: this.title
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      }).then(function (result) {
+        _this.playlistBtn();
+
+        _this.title = '';
+        console.log(result);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    playlistBtn: function playlistBtn() {
+      this.$emit('playlistBtn');
+    }
   }
 };
 exports.default = _default;
@@ -11551,9 +11603,89 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("playlistCard")], 1)
+  return _c(
+    "div",
+    { attrs: { id: "playlistCover" } },
+    [
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "row", attrs: { id: "playlistHeader" } }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.title,
+                expression: "title"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              id: "playlistInput",
+              type: "text",
+              placeholder: "Playlist Title"
+            },
+            domProps: { value: _vm.title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.title = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "2" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-light",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.addPlaylist($event)
+                }
+              }
+            },
+            [_vm._v("\n                Create Playlist\n            ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.playlistData, function(playlist) {
+        return _c("div", { key: playlist.id, staticClass: "row" }, [
+          _c("div", { staticClass: "col-4" }, [
+            _vm._v(" " + _vm._s(playlist.name) + " ")
+          ]),
+          _vm._v(" "),
+          _c("hr")
+        ])
+      }),
+      _vm._v(" "),
+      _vm.playlistData.length == 0
+        ? _c("div", { attrs: { id: "noPlaylist" } }, [
+            _c("h6", { staticClass: "display-4" }, [
+              _vm._v(" \n            you don't have any playlist\n        ")
+            ])
+          ])
+        : _vm._e()
+    ],
+    2
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6" }, [_c("h3", [_vm._v("Playlist")])])
+  }
+]
 render._withStripped = true
 
           return {
@@ -11586,7 +11718,7 @@ render._withStripped = true
       
       }
     })();
-},{"./playlistCard":"src/componets/dashboard/playlistCard.vue","_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/componets/dashboard/card.vue":[function(require,module,exports) {
+},{"./playlistCard":"src/componets/dashboard/playlistCard.vue","axios":"node_modules/axios/index.js","_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/componets/dashboard/card.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11822,12 +11954,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
 var _default = {
   name: "mainBody",
   data: function data() {
     return {
       displayPage: 'home',
-      baseUrl: 'http://localhost:3000'
+      baseUrl: 'http://localhost:3000',
+      playlistData: []
     };
   },
   components: {
@@ -11836,12 +11972,22 @@ var _default = {
   },
   methods: {
     playlistBtn: function playlistBtn() {
+      var _this = this;
+
       this.displayPage = 'playlist';
       (0, _axios.default)({
         method: 'get',
-        url: this.baseUrl + '/playlist'
-      }).then(function (result) {
-        console.log(result);
+        url: this.baseUrl + '/playlist',
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      }).then(function (arr) {
+        var newArr = [];
+        arr.data.result.forEach(function (element) {
+          element.imgUrl = 'https://picsum.photos/200?grayscale&blur=2';
+          newArr.push(element);
+        });
+        _this.playlistData = newArr;
       }).catch(function (err) {
         console.log(err);
       });
@@ -11899,7 +12045,16 @@ exports.default = _default;
       _vm.displayPage == "home" ? _c("section", [_c("homeTab")], 1) : _vm._e(),
       _vm._v(" "),
       _vm.displayPage == "playlist"
-        ? _c("section", [_c("playlist")], 1)
+        ? _c(
+            "section",
+            [
+              _c("playlist", {
+                attrs: { playlistData: _vm.playlistData },
+                on: { playlistBtn: _vm.playlistBtn }
+              })
+            ],
+            1
+          )
         : _vm._e()
     ])
   ])
@@ -12173,7 +12328,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59576" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52040" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

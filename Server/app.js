@@ -4,7 +4,7 @@ if (process.env.NODE_ENV == 'development') {
 }
 
 const express = require("express")
-const router = require("./routers/todo")
+const router = require("./router")
 const errorHandler = require('./middlewares/errorHandler')
 const app = express()
 const cors = require('cors')

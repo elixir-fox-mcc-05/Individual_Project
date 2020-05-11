@@ -11552,6 +11552,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   name: "playlist",
   props: ['playlistData'],
@@ -11658,13 +11672,36 @@ exports.default = _default;
       ]),
       _vm._v(" "),
       _vm._l(_vm.playlistData, function(playlist) {
-        return _c("div", { key: playlist.id, staticClass: "row" }, [
-          _c("div", { staticClass: "col-4" }, [
-            _vm._v(" " + _vm._s(playlist.name) + " ")
-          ]),
-          _vm._v(" "),
-          _c("hr")
-        ])
+        return _c(
+          "div",
+          {
+            key: playlist.id,
+            staticClass: "row",
+            attrs: { id: "playlistRow" }
+          },
+          [
+            _c("div", { staticClass: "col-5 playlistCol startPC" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-link btn-block",
+                  staticStyle: { "text-align": "left" }
+                },
+                [
+                  _vm._v(
+                    "\n             " +
+                      _vm._s(playlist.name) +
+                      " \n            "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(1, true),
+            _vm._v(" "),
+            _vm._m(2, true)
+          ]
+        )
       }),
       _vm._v(" "),
       _vm.playlistData.length == 0
@@ -11684,6 +11721,26 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-6" }, [_c("h3", [_vm._v("Playlist")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3 playlistCol" }, [
+      _c("small", [
+        _c("span", { staticClass: "text text-muted" }, [_vm._v(" 0 songs")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-2 playlistCol" }, [
+      _c("small", [
+        _c("span", { staticClass: "text text-muted" }, [_vm._v(" duration :")])
+      ])
+    ])
   }
 ]
 render._withStripped = true

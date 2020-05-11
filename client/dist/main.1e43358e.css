@@ -91,7 +91,7 @@ color: whitesmoke;
  margin-right: 20px;
 }
 #playlistCover{
-    padding: 0 0 0 30px;
+    padding: 0 30px;
     background-color: rgb(15, 15, 15);
     height: 90vh;
 }
@@ -112,6 +112,19 @@ color: whitesmoke;
     margin-top:250px ;
     text-align: center;
     color: gray;
+}
+
+.playlistCol {
+    border-bottom:1px solid rgb(39, 39, 39)  ;
+    padding: 10px 0;
+}
+
+.startPC {
+    margin-left:15px ;
+}
+
+#playlistCol {
+    margin-top: 40px;
 }
 #card {
     background-color:transparent;

@@ -15,8 +15,22 @@
               </button>
           </div>
       </div>
-      <div class="row" v-for="playlist in playlistData" :key="playlist.id">
-          <div class="col-4"> {{ playlist.name }} </div> <hr>
+      <div class="row" v-for="playlist in playlistData" :key="playlist.id" id="playlistRow">
+          <div class="col-5 playlistCol startPC">
+              <button class="btn btn-link btn-block" style="text-align:left;">
+               {{ playlist.name }} 
+              </button>
+            </div>
+          <div class="col-3 playlistCol">
+               <small>
+               <span class="text text-muted"> 0 songs</span> 
+               </small>
+          </div>
+          <div class="col-2 playlistCol">
+               <small>
+               <span class="text text-muted"> duration :</span> 
+               </small>
+          </div>
       </div>
       <div v-if="playlistData.length==0" id="noPlaylist">
           <h6 class="display-4"> 
@@ -71,7 +85,7 @@ export default {
 
 <style>
 #playlistCover{
-    padding: 0 0 0 30px;
+    padding: 0 30px;
     background-color: rgb(15, 15, 15);
     height: 90vh;
 }
@@ -92,5 +106,18 @@ export default {
     margin-top:250px ;
     text-align: center;
     color: gray;
+}
+
+.playlistCol {
+    border-bottom:1px solid rgb(39, 39, 39)  ;
+    padding: 10px 0;
+}
+
+.startPC {
+    margin-left:15px ;
+}
+
+#playlistCol {
+    margin-top: 40px;
 }
 </style>

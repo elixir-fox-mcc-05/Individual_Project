@@ -2,9 +2,9 @@
 
 module.exports = (err, req, res, next) => {
     if(err.code) {
-        return res.status(err.code).json({
+        return res.status(err.code).json(
             err
-        });
+        );
     } else if(err.name){
         let report = {
             type : "Bad Request",

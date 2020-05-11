@@ -129,7 +129,13 @@ export default {
                 localStorage.clear()
                 this.loggedIn = false
                 this.currentPage = ""
-            })            
+            });
+            gapi.load('auth2', function() {
+                gapi.auth2.init()
+            })
+            gapi.signin2.render('google-signin-button', {
+                onsuccess: this.onSignIn
+            })
         },
         register(userData){
             axios({
@@ -146,6 +152,7 @@ export default {
                     this.messageSucces = `Succes Create an account with id ${data.id} and email ${data.email}`
                 })
                 .catch(err => {
+                    console.log(err.response)
                     this.message = err.response.data.msg
                 })
         },
@@ -171,7 +178,6 @@ export default {
         },
         onSignIn(user) {
             const profile = user.getAuthResponse().id_token;
-            console.log(profile)
             axios({
                 method: 'post',
                 url : this.baseUrl + 'user/google-login',
@@ -234,10 +240,10 @@ export default {
     mounted() {
         gapi.load('auth2', function() {
             gapi.auth2.init();
-        });
+        })
         gapi.signin2.render('google-signin-button', {
             onsuccess: this.onSignIn
-        });
+        })
     },
 }
 </script>

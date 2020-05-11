@@ -92,7 +92,6 @@ export default {
         onSignIn(data){
             this.$emit("onSignIn", data)
         }
-
     }
 }
 </script>

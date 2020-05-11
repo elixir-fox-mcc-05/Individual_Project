@@ -92,7 +92,7 @@ class UserController{
             return next({
                 type : "Bad Request",
                 code : 400,
-                message : "Password & Confirm Password doesn't match"
+                msg : "Password & Confirm Password doesn't match"
             });
         }
         const value = {

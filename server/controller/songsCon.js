@@ -3,16 +3,20 @@ let axios = require('axios')
 class songCon{
     static getSongs(req,res) {
         axios({
-            "method":"GET",
-            "url":"	https://data.kemkes.go.id/data",
+            method:"GET",
+            url:"https://theaudiodb.com/api/v1/json/5d656564694f534d656564/mostloved.php?format=track&format=track",
             })
-            .then((response)=>{
-                res.send(response)
-            console.log(response)
+            .then(response=>{
+                let playlist = response.data
+                res.status(200).json({
+                    playlist
+                })
             })
-            .catch((error)=>{
-                res.send(error)
+            .catch(error=>{
                 console.log(error)
+                res.status(500).json({
+                    error : 'internal server error'
+                })
             })
     }
 

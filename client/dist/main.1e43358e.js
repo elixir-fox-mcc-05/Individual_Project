@@ -11791,9 +11791,9 @@ exports.default = void 0;
 //
 //
 //
-//
 var _default = {
-  name: "card"
+  name: "card",
+  props: ['song']
 };
 exports.default = _default;
         var $aa5d01 = exports.default || module.exports;
@@ -11808,31 +11808,24 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card", attrs: { id: "card" } }, [
-      _c("img", {
-        staticClass: "card-img-top",
-        attrs: { src: "https://i.imgur.com/GrkPDIK.jpg", alt: "Card image cap" }
-      }),
+  return _c("div", { staticClass: "card", attrs: { id: "card" } }, [
+    _c("img", {
+      staticClass: "card-img-top",
+      attrs: { src: _vm.song.strTrackThumb, alt: "Card image cap" }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body", attrs: { id: "card-body" } }, [
+      _c("h6", { staticClass: "card-title" }, [
+        _vm._v(_vm._s(_vm.song.strTrack))
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body", attrs: { id: "card-body" } }, [
-        _c("h6", { staticClass: "card-title" }, [_vm._v("With me")]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [
-          _vm._v(
-            "Some quick example text to build on the card title and make up the bulk of the card's content."
-          )
-        ])
-      ])
+      _c("p", [_vm._v(" Artist : " + _vm._s(_vm.song.strArtist) + " ")]),
+      _vm._v(" "),
+      _c("span", {}, [_vm._v(" Album : " + _vm._s(_vm.song.strAlbum) + " ")])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -11890,14 +11883,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
-//
-//
 var _default = {
   name: "homeTab",
+  props: ['songs'],
   components: {
     card: _card.default
   }
@@ -11916,31 +11904,23 @@ exports.default = _default;
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "main" } }, [
-    _c("div", { attrs: { id: "section" } }, [
-      _c("br"),
-      _vm._v(" "),
-      _c("h3", [_vm._v("Made For You")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { attrs: { id: "cardbox" } },
-        [_c("card"), _vm._v(" "), _c("card")],
-        1
-      )
-    ]),
+    _c("br"),
     _vm._v(" "),
-    _c("div", [
-      _c("br"),
-      _vm._v(" "),
-      _c("h3", [_vm._v("Charts")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { attrs: { id: "cardbox" } },
-        [_c("card"), _vm._v(" "), _c("card")],
-        1
-      )
-    ])
+    _c("h3", [_vm._v("Top 50 Songs")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "section", attrs: { id: "mfy" } },
+      _vm._l(_vm.songs, function(song) {
+        return _c(
+          "div",
+          { key: song.id, attrs: { id: "cardbox" } },
+          [_c("card", { attrs: { song: song } })],
+          1
+        )
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = []
@@ -12014,13 +11994,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 var _default = {
   name: "mainBody",
+  props: ['songs'],
   data: function data() {
     return {
       displayPage: 'home',
       baseUrl: 'http://localhost:3000',
-      playlistData: []
+      playlistData: [],
+      songs: []
     };
   },
   components: {
@@ -12099,7 +12083,9 @@ exports.default = _default;
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-9" }, [
-      _vm.displayPage == "home" ? _c("section", [_c("homeTab")], 1) : _vm._e(),
+      _vm.displayPage == "home"
+        ? _c("section", [_c("homeTab", { attrs: { songs: _vm.songs } })], 1)
+        : _vm._e(),
       _vm._v(" "),
       _vm.displayPage == "playlist"
         ? _c(
@@ -12161,8 +12147,11 @@ var _navbar = _interopRequireDefault(require("./navbar"));
 
 var _mainBody = _interopRequireDefault(require("./mainBody"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -12175,7 +12164,10 @@ var _default = {
   components: {
     navbar: _navbar.default,
     mainBody: _mainBody.default
-  }
+  },
+  props: ['songs'],
+  methods: {},
+  created: function created() {}
 };
 exports.default = _default;
         var $2728db = exports.default || module.exports;
@@ -12193,7 +12185,11 @@ exports.default = _default;
   return _c(
     "div",
     { staticClass: "container-fluid" },
-    [_c("navbar"), _vm._v(" "), _c("mainBody")],
+    [
+      _c("navbar"),
+      _vm._v(" "),
+      _c("mainBody", { attrs: { songs: _vm.songs } })
+    ],
     1
   )
 }
@@ -12230,7 +12226,7 @@ render._withStripped = true
       
       }
     })();
-},{"./navbar":"src/componets/dashboard/navbar.vue","./mainBody":"src/componets/dashboard/mainBody.vue","_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/app.vue":[function(require,module,exports) {
+},{"./navbar":"src/componets/dashboard/navbar.vue","./mainBody":"src/componets/dashboard/mainBody.vue","axios":"node_modules/axios/index.js","_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/app.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12242,8 +12238,13 @@ var _landing = _interopRequireDefault(require("./componets/landing/landing"));
 
 var _dashboard = _interopRequireDefault(require("./componets/dashboard/dashboard"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
 //
 //
 //
@@ -12264,15 +12265,31 @@ var _default = {
   },
   data: function data() {
     return {
-      displayPage: 'landing'
+      displayPage: 'landing',
+      songs: []
     };
   },
   methods: {
     confirmLogin: function confirmLogin() {
       this.displayPage = 'dashboard';
+      this.getSongs();
     },
     confirmLogut: function confirmLogut() {
       this.displayPage = 'login';
+    },
+    getSongs: function getSongs() {
+      var _this = this;
+
+      console.log('masuk auto fetch');
+      (0, _axios.default)({
+        method: 'get',
+        url: 'https://theaudiodb.com/api/v1/json/5d656564694f534d656564/mostloved.php?format=track&format=track'
+      }).then(function (result) {
+        _this.songs = result.data.loved;
+        console.log(_this.songs);
+      }).catch(function (err) {
+        console.log(err);
+      });
     }
   },
   created: function created() {
@@ -12304,7 +12321,16 @@ exports.default = _default;
         : _vm._e(),
       _vm._v(" "),
       _vm.displayPage == "dashboard"
-        ? _c("div", [_c("dashboard")], 1)
+        ? _c(
+            "div",
+            [
+              _c("dashboard", {
+                attrs: { songs: _vm.songs },
+                on: { getSongs: _vm.getSongs }
+              })
+            ],
+            1
+          )
         : _vm._e()
     ],
     1
@@ -12343,7 +12369,7 @@ render._withStripped = true
       
       }
     })();
-},{"./componets/landing/landing":"src/componets/landing/landing.vue","./componets/dashboard/dashboard":"src/componets/dashboard/dashboard.vue","_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/main.js":[function(require,module,exports) {
+},{"./componets/landing/landing":"src/componets/landing/landing.vue","./componets/dashboard/dashboard":"src/componets/dashboard/dashboard.vue","axios":"node_modules/axios/index.js","_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/main.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -12385,7 +12411,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52040" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49415" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

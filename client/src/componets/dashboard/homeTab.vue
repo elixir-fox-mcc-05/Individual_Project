@@ -1,17 +1,11 @@
 <template>
     <div id="main">
-        <div id="section">
-            <br> <h3>Made For You</h3> 
-            <div id="cardbox">
-                <card></card>
-                <card></card>
-            </div>
-        </div>
-        <div>
-            <br> <h3>Charts</h3> 
-            <div id="cardbox">
-                <card></card>
-                <card></card>
+        <br> <h3>Top 50 Songs</h3> 
+        <div class="section" id="mfy">
+            <div id="cardbox" v-for="song in songs" :key="song.id">
+                <card
+                :song="song"
+                ></card>
             </div>
         </div>
     </div>
@@ -21,6 +15,7 @@
 import card from './card'
 export default {
     name : "homeTab",
+    props : ['songs'],
     components : {
         card,
     }
@@ -47,8 +42,13 @@ h3 {
     padding-left: 30px;
 }
 
-#section {
+.section {
     margin-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
 }
 
 </style>

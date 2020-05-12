@@ -7,7 +7,9 @@
         </div>
         <div class="col-9">
             <section v-if="displayPage=='home'">
-                <homeTab></homeTab>
+                <homeTab
+                :songs="songs"
+                ></homeTab>
             </section>
             <section v-if="displayPage=='playlist'">
                 <playlist
@@ -27,11 +29,13 @@ import axios from 'axios'
 
 export default {
     name : "mainBody",
+    props : ['songs'],
     data() {
         return {
             displayPage:'home',
             baseUrl : 'http://localhost:3000',
             playlistData : [],
+            songs : [],
         }
     },
     components : {

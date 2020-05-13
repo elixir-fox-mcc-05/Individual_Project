@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "database_muvi",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "database_muvi",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "jqmtyiolyfxevp",
+    "password": "9f16b73f2271752e9f1f023750e8451a4c8bfcb5cec9cd63661257a07a76e3c2",
+    "database": "dfs6k20orngqit",
+    "host": "ec2-54-81-37-115.compute-1.amazonaws.com",
+    "dialect": "postgres"
+  }
+}

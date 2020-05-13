@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Muvi</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./src/main.js"></script>
+    <script>
+        // sidebar
+        const sidenav = document.querySelectorAll('.sidenav')
+        M.Sidenav.init(sidenav)
+
+        // slider
+        const slider = document.querySelectorAll('#sliderLandingPage')
+        M.Slider.init(slider, {
+            indicators: false,
+            height: 550,
+            interval: 3000
+        })
+
+        const slider2 = document.querySelectorAll('#sliderDashboardPage')
+        M.Slider.init(slider2, {
+            indicators: false,
+            height: 400,
+            interval: 3000
+        })
+
+        //parallax
+        const parallax = document.querySelectorAll('.parallax')
+        M.Parallax.init(parallax)
+
+    </script>
+
+</body>
+</html>

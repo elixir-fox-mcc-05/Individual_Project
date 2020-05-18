@@ -41,8 +41,8 @@ class UserController{
                 return next(err);
             });
     }
-    
-    static googleLogin(req, res, next){ 
+
+    static googleLogin(req, res, next){
         let google_token = req.headers.google_token;
         let email = null;
         let newUser = false;
@@ -62,6 +62,7 @@ class UserController{
                     newUser = true;
                     return User
                         .create({
+                            name: process.env.Default_name,
                             email,
                             password : process.env.Default_user_password
                         });

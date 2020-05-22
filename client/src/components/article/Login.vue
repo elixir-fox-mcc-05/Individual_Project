@@ -27,6 +27,7 @@
                                 
                             </div>
                             <button @click.prevent="login" class="button is-block is-info is-large is-fullwidth">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                            <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
                         </form>
                     </div>
                   
@@ -38,9 +39,13 @@
 
 
 <script>
+import GoogleLogin from 'vue-google-login';
 export default {
     name : "Login",
-    props : ['email','password','loggedIn'],
+    components: {
+        GoogleLogin
+    },
+    props : ['params','renderParams','email','password','loggedIn'],
     methods : {
         login(){
             let data = {
@@ -48,6 +53,13 @@ export default {
                 password : this.password
             }
             this.$emit('login',data)
+        },
+        onSuccess(googleUser){
+            // console.log(googleUser);
+            this.$emit('onSuccess',googleUser)
+        },
+        onFailure(googleUser){
+            this.$emit('onFailure')
         }
     }
 }

@@ -6,6 +6,19 @@
             <br><img :src='musicianProfile.strArtistThumb' class="sizeImg" alt="musician pict"><br>
             <h1 class="mt-0 text-center">{{ musicianProfile.strArtist }}</h1>
             <hr class="my-3 new5">
+            <div class="text-center">
+                <div class="row justify-content-around">
+                    <div class="col-4">
+                        <button type="button" class="btn btn-sm btn-dark" @click="showAlbumModal">ALBUM LIST</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-sm btn-warning">ADD TO FAVORITE</button>
+                    </div>
+                </div>
+                <AlbumModal ref="albumModalComponent" :artistAlbum='artistAlbum'></AlbumModal>
+                <hr class="my-2 new1">
+            </div>
+            <div>
             <div v-if="musicianProfile.strCountry">
                 <h3>Country</h3>
                 <p class="text-justify">{{ musicianProfile.strCountry }}</p>
@@ -64,9 +77,28 @@
 </template>
 
 <script>
+import AlbumModal from './AlbumModal'
 export default {
     name: 'MusicianData',
-    props: [ 'musicianProfile' ]
+    props: [ 'musicianProfile' ],
+    components : {
+        AlbumModal
+    },
+    data () {
+        return {
+            artistAlbum: {
+                id: '',
+                name: ''
+            } 
+        }
+    },
+    methods : {
+        showAlbumModal() {
+            this.artistAlbum.id = this.musicianProfile.idArtist
+            this.artistAlbum.name = this.musicianProfile.strArtist
+            this.$refs.albumModalComponent.showAlbum()
+        }
+    }
 }
 </script>
 

@@ -9,10 +9,11 @@
             <div class="text-center">
                 <div class="row justify-content-around">
                     <div class="col-4">
-                        <button type="button" class="btn btn-sm btn-dark" @click="showAlbumModal">ALBUM LIST</button>
+                        <button type="button" class="btn btn-sm btn-dark" @click.prevent="showAlbumModal">ALBUM LIST</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btn btn-sm btn-warning">ADD TO FAVORITE</button>
+                        <button type="button" class="btn btn-sm btn-warning" @click.prevent="addFavorite">ADD TO FAVORITE</button>
+                        <p v-if="alreadyFavorite === true"><strong>Already in your favorite list</strong></p>
                     </div>
                 </div>
                 <AlbumModal ref="albumModalComponent" :artistAlbum='artistAlbum'></AlbumModal>
@@ -78,9 +79,10 @@
 
 <script>
 import AlbumModal from './AlbumModal'
+import axios from 'axios'
 export default {
     name: 'MusicianData',
-    props: [ 'musicianProfile' ],
+    props: [ 'musicianProfile', 'alreadyFavorite' ],
     components : {
         AlbumModal
     },
@@ -89,7 +91,8 @@ export default {
             artistAlbum: {
                 id: '',
                 name: ''
-            } 
+            },
+            musicianName: ''
         }
     },
     methods : {
@@ -97,6 +100,10 @@ export default {
             this.artistAlbum.id = this.musicianProfile.idArtist
             this.artistAlbum.name = this.musicianProfile.strArtist
             this.$refs.albumModalComponent.showAlbum()
+        },
+        addFavorite() {
+            this.musicianName = this.musicianProfile.strArtist
+            this.$emit('addFavorite', this.musicianName)
         }
     }
 }

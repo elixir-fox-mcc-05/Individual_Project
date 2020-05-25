@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <h6 class="text-center text-danger" v-if="errorMessage">{{ errorMessage }} </h6>
                 <div class="list-group" v-for="(album, i) in albumList" :key="i">
-                    <button type="button" class="list-group-item list-group-item-action" @click='showTrackModal(album.idAlbum, album.strAlbum)'>
+                    <button type="button" class="list-group-item list-group-item-action" @click.prevent='showTrackModal(album.idAlbum, album.strAlbum)'>
                         <strong>{{i+1}}. {{ album.strAlbum }} ( {{ album.intYearReleased }} )</strong>
                     </button>
                 </div>

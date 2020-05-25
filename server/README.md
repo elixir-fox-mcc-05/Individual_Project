@@ -21,12 +21,9 @@ Create user data
 * **URL**
 
   /users/register
-
   
 *  **URL Params**
 
-   **Required:**
- 
     None
 
 * **Data Params**
@@ -69,17 +66,13 @@ Create user data
                 "message": "Name must be filled"
             },
             {
-                "message": "Your Name must be 1-20 characters long"
+                "message": "Your Name must be 1-15 characters long"
             },
             {
                 "message": "Email already registered"
             }
           ]
         }
-    
-    OR
-
-  * **Code:** 500 Internal Server Error <br />   
 
 ### **Login User**
 
@@ -95,8 +88,6 @@ Login using user data that already created/registerd
 
 *  **URL Params**
 
-   **Required:**
- 
     None
 
 * **Data Params**
@@ -131,7 +122,215 @@ Login using user data that already created/registerd
             }
           ]
         }
-      
+
+----
+## **Favorites**
+----
+Represents for favorites musician that all users save
+
+### **Add Favorite**
+
+Create favorite data for spesific userId
+
+* **Method:**
+
+  `POST`
+
+* **URL**
+
+  /products
+
+*  **URL Params**
+ 
+    None
+
+*  **Headers**
+    
+    token
+
+* **Data Params**
+
+    | Params       | Description                                                   |
+    |--------------|---------------------------------------------------------------|
+    | name         | favorite musician name, must be unique in spesific userId     |
+
+* **Success Response:**
+
+  * **Code:** 201 Created<br />
+  **Content:** 
+
+        {
+            "product": {
+                "id": 1,
+                "name": "example 1",
+                "userId": 1,
+                "updatedAt": "2020-05-13T17:58:28.831Z",
+                "createdAt": "2020-05-13T17:58:28.831Z"
+            }
+        }
+
+* **Error Response:**
+
+  * **Code:** 401 Unauthorized <br />
+  **Content:**
+
+        {
+          "name": "Unauthorized",
+          "errors": [
+                {
+                    "message": "Unauthorized. Please login first"
+                },
+          ]
+        }
+
     OR
 
-  * **Code:** 500 Internal Server Error <br /> 
+  * **Code:** 400 Bad Request <br />
+  **Content:**
+
+        {
+          "name": "BadRequest",
+          "errors": [
+                {
+                    "message": "Name must be filled"
+                },
+                {
+                    "message": "example 1 already in your favorite"
+                },
+          ]
+        }
+    
+    OR
+
+  * **Code:** 500 Internal Server Error <br />
+  **Content:**
+
+        {
+          "name": "InternalServerError",
+          "errors": [
+                {
+                    "message": "WHERE parameter \"name\" has invalid \"undefined\" value"
+                },
+          ]
+        }
+
+### **Read All Favorites**
+
+Read all favorites data with spesific userId
+
+* **Method:**
+
+  `GET`
+
+* **URL**
+
+  /products
+
+*  **URL Params**
+ 
+    None
+
+*  **Headers**
+    
+    token
+
+* **Data Params**
+
+    none
+
+* **Success Response:**
+
+  * **Code:** 200 Ok<br />
+  **Content:** 
+
+        {
+            "products": [
+                {
+                    "id": 1,
+                    "name": "example 1",
+                    "userId": 1,
+                    "updatedAt": "2020-05-13T17:58:28.831Z",
+                    "createdAt": "2020-05-13T17:58:28.831Z"
+                },
+                {
+                    "id": 2,
+                    "name": "2 example",
+                    "userId": 1,
+                    "updatedAt": "2020-05-13T17:58:28.831Z",
+                    "createdAt": "2020-05-13T17:58:28.831Z"
+                }
+            ]
+        }
+
+* **Error Response:**
+
+  * **Code:** 401 Unauthorized <br />
+  **Content:**
+
+        {
+          "name": "Unauthorized",
+          "errors": [
+                {
+                    "message": "Unauthorized. Please login first"
+                },
+          ]
+        }
+
+### **Delete Favorite**
+
+Delete favorite data with spesific userId by favoriteId
+
+* **Method:**
+
+  `DELETE`
+
+* **URL**
+
+  /products/:favoriteId
+
+*  **URL Params**
+ 
+    favoriteId = [integer]
+
+*  **Headers**
+    
+    token
+
+* **Data Params**
+
+    None
+
+* **Success Response:**
+
+  * **Code:** 200 Ok<br />
+  **Content:** 
+
+            {
+                "message": "Favorite with id 9 delete"
+            }
+
+* **Error Response:**
+
+    * **Code:** 401 Unauthorized <br />
+    **Content:**
+
+            {
+                "name": "Unauthorized",
+                "errors": [
+                        {
+                            "message": "Unauthorized. Please login first"
+                        },
+                ]
+            }
+
+    * **Code:** 404 Not Found <br />
+    **Content:**
+
+            {
+                "name": "NotFound",
+                "errors": [
+                        {
+                            "message": "Favorite with id 9 not found"
+                        },
+                ]
+            }

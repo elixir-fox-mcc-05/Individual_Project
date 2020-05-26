@@ -65,7 +65,7 @@ export default {
             let google_token = googleUser.getAuthResponse().id_token
             axios({
               method : 'post',
-              url : 'http://localhost:3000/googlelogin',
+              url : 'https://foodlisto.herokuapp.com/googlelogin',
               headers : {
                 google_token
               }
@@ -97,7 +97,7 @@ export default {
             // console.log(data)
             axios({
                 method: 'post',
-                url : 'http://localhost:3000/login',
+                url : 'https://foodlisto.herokuapp.com/login',
                 data : {
                     email : data.email,
                     password : data.password
@@ -120,7 +120,7 @@ export default {
             // console.log(name)
             axios({
                 method:'post',
-                url:'httpp://localhost:3000/foods/search',
+                url:'https://foodlisto.herokuapp.com/foods/search',
                 headers : {
                     token : localStorage.token
                 },

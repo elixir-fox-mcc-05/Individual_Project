@@ -8,7 +8,7 @@
 
 * **Method:**
   
-  `DELETE`
+  `POST`
   
 *  **URL Params**
 

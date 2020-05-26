@@ -76,8 +76,6 @@ class UserController {
         return User.findOne({ where: { email } });
       })
       .then((user) => {
-        console.log("masuk then 2")
-        console.log(user, "<+++++++++< user")
         if (user) {
           return user;
         } else {

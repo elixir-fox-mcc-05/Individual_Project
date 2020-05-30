@@ -48,7 +48,10 @@ export default new Vuex.Store({
     fetchPopularMovie(context) {
       server({
         method: "get",
-        url: "/movie/popular"
+        url: "/movie/popular",
+        headers: {
+          token: localStorage.token
+        }
       })
         .then((response) => {
           context.commit("SET_POPULAR_MOVIE", response.data.results);
@@ -60,7 +63,10 @@ export default new Vuex.Store({
     fetchUpcomingMovie(context) {
       server({
         method: "get",
-        url: "/movie/upcoming"
+        url: "/movie/upcoming",
+        headers: {
+          token: localStorage.token
+        }
       })
         .then((response) => {
           context.commit("SET_UPCOMING_MOVIE", response.data.results);
@@ -72,7 +78,10 @@ export default new Vuex.Store({
     fetchToprateMovie(context) {
       server({
         method: "get",
-        url: "/movie/toprate"
+        url: "/movie/toprate",
+        headers: {
+          token: localStorage.token
+        }
       })
         .then((response) => {
           context.commit("SET_TOPRATE_MOVIE", response.data.results);
@@ -80,7 +89,7 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err);
         });
-    },
+    }
   },
   modules: {}
 });

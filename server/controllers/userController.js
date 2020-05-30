@@ -70,12 +70,14 @@ class UserController {
     let name = null;
     googleVerification(google_token)
       .then((payload) => {
-        console.log("masuk then 1")
         email = payload.email;
         name = payload.name;
+        console.log(email)
         return User.findOne({ where: { email } });
       })
       .then((user) => {
+        console.log(user, "user============")
+        console.log('masuk then 2')
         if (user) {
           return user;
         } else {

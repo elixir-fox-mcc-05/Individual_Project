@@ -1,11 +1,6 @@
 <template>
   <div class="error">
-    <div v-if="Array.isArray(myError)">
-      <p v-for="message in myError" :key="message">{{ message.message }}</p>
-    </div>
-    <div v-else>
-      <p>{{ myError.msg }}</p>
-    </div>
+    <p>{{ myError }}</p>
   </div>
 </template>
 

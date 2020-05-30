@@ -55,7 +55,10 @@ export default {
     fetchDetailMovie() {
       server({
         method: "get",
-        url: `/movie/detail/${this.$route.params.id}`
+        url: `/movie/detail/${this.$route.params.id}`,
+        headers: {
+          token: localStorage.token
+        }
       })
         .then((response) => {
           this.movieOne = response.data;

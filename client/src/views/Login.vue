@@ -13,7 +13,7 @@
       <input
         v-model="email"
         class="username"
-        type="text"
+        type="email"
         placeholder="Enter your email"
       />
       <input
@@ -95,29 +95,34 @@ export default {
       this.$router.push("/register");
     },
     login() {
-      server({
-        method: "post",
-        url: "/login",
-        data: {
-          email: this.email,
-          password: this.password
-        }
-      })
-        .then((response) => {
-          this.$store.commit("CHANGE_MYERROR", "");
-          this.$store.commit("CHANGE_MYNOTIF", response.data.msg);
-          this.$store.dispatch("fetchPopularMovie");
-          localStorage.setItem("token", response.data.token);
-          this.$store.commit("SET_LOGIN", true);
-          this.$router.push("/dashboard");
-          (this.email = ""), (this.password = "");
+      if (this.email == "") {
+        this.$store.commit("CHANGE_MYERROR", "email is required");
+      } else if (this.password == "") {
+        this.$store.commit("CHANGE_MYERROR", "password is required");
+      } else {
+        server({
+          method: "post",
+          url: "/login",
+          data: {
+            email: this.email,
+            password: this.password
+          }
         })
-        .catch((err) => {
-          console.log('masuk error')
-          console.log(err, "<++++++=err")
-          this.$store.commit("CHANGE_MYNOTIF", "");
-          this.$store.commit("CHANGE_MYERROR", err.response.data.err);
-        });
+          .then((response) => {
+            this.$store.commit("CHANGE_MYERROR", "");
+            this.$store.commit("CHANGE_MYNOTIF", response.data.msg);
+            this.$store.dispatch("fetchPopularMovie");
+            localStorage.setItem("token", response.data.token);
+            this.$store.commit("SET_LOGIN", true);
+            this.$router.push("/dashboard");
+            (this.email = ""), (this.password = "");
+          })
+          .catch((err) => {
+            console.log(err, "err bray ==========")
+            this.$store.commit("CHANGE_MYNOTIF", "");
+            this.$store.commit("CHANGE_MYERROR", err.response.data.err);
+          });
+      }
     },
     switchVisibility() {
       (this.passwordFieldType =
@@ -125,9 +130,7 @@ export default {
         (this.isShowing = !this.isShowing);
     },
     onSuccess(googleUser) {
-      console.log('masuk google')
       const id_token = googleUser.getAuthResponse().id_token;
-      console.log(id_token, "id_token")
       server({
         method: "post",
         url: "/google-login",
@@ -135,7 +138,7 @@ export default {
           google_token: id_token
         }
       }).then((response) => {
-        console.log(response, "response")
+        console.log(response, "response============");
         this.$store.commit("CHANGE_MYERROR", "");
         this.$store.commit("CHANGE_MYNOTIF", response.data.msg);
         localStorage.setItem("token", response.data.token);
@@ -172,7 +175,7 @@ export default {
     padding: 30px;
     border-radius: 10px;
   }
- h3 {
+  h3 {
     font-weight: bold;
     font-size: 40px;
     text-align: center;
@@ -212,7 +215,7 @@ export default {
     color: #4d4e52;
   }
   .Login {
-     margin-top: 30px;
+    margin-top: 30px;
     margin-left: 5vw;
     width: 30vw;
     height: 5vh;

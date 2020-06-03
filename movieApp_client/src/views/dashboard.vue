@@ -1,7 +1,7 @@
 <template>
   <div id="dashboard">
       <div id="nav-bar" class="row" style="display:flex; justify-content: space-between;padding:25px;background-color:blue;">
-          <h2>Top Reel</h2>
+          <h2>Top Movie</h2>
           <button class="btn btn-danger" @click="logout">Log out</button>
       </div>
       <div class="container-fluid justify-content-center" id="dashboard-box" style="display:flex; justify-content:center;">

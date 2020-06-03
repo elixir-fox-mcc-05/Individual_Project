@@ -1,85 +1,67 @@
 'use strict';
 
-const {generatePassword} = require('../helpers/bcrypt.js');
+const { generatePassword } = require('../helpers/bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
-
   const Model = sequelize.Sequelize.Model;
 
-  class User extends Model{}
-  
-  User.init({
-    email: {
-      type: DataTypes.STRING,
-      unique: {
-        args: true,
-        msg: "Email already exist"
+  class User extends Model {}
+
+  User.init(
+    {
+      name: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'name is required',
+          },
+        },
       },
-      allowNull: false,
-      validate: {
-        notNull: {
+      email: {
+        type: DataTypes.STRING,
+        unique: {
           args: true,
-          msg: "Email is required"
+          msg: 'email already in use',
         },
-        notEmpty: {
-          args: true,
-          msg: "Email is required"
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'email is required',
+          },
+          isEmail: {
+            args: true,
+            msg: 'invalid email format',
+          },
         },
-        isEmail: {
-          args: true,
-          msg: "Invalid email format"
-        }
-      }
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'email is required',
+          },
+          len: {
+            args: 4,
+            msg: 'password must be of more than 4 characters',
+          },
+        },
+      },
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: "Password is required"
+    {
+      sequelize,
+      hooks: {
+        beforeCreate: (user) => {
+          user.password = generatePassword(user.password);
         },
-        notEmpty: {
-          args: true,
-          msg: "Password is required"
-        },
-        len: {
-          args: [7],
-          msg: "Password has minimal length 7 characters"
-        }
-      }
+      },
     }
-  },
-  {
-    sequelize,
-    hooks: {
-      beforeCreate: (user) => {
-        user.password = generatePassword(user.password);
-      }
-    },
-    validate: {
-      valueNotEmpty(){
-        if(!this.email || !this.password){
-          throw new Error(`All data must filled`);
-        }
-      },
-      isUnique(){
-        return User.findOne({
-          where: {
-            email: this.email
-          }
-        })
-        .then(data => {
-          if(data){
-            throw new Error('email is being used')
-          } 
-        })
-      }
-    },
-    modelName: "User"
-  });
-  
-  User.associate = function(models) {
+  );
+
+  User.associate = function (models) {
     // associations can be defined here
   };
   return User;

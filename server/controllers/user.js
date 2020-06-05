@@ -24,33 +24,34 @@ class UserController {
     } 
 
     static login (req, res, next) {
-        let email = req.body.email
-        let password = req.body.password
-        User.findOne({where : {email : email}})
-        .then((user) => {
-            if (!user) {
-                throw {
-                    msg : 'wrong email / password',
-                    code : 401
-                }
-            } else if (!compare(req.body.password, user.password)) {
-                console.log(password, user.password);
-                throw {
-                    msg : 'wrong email / password',
-                    code : 401
-                }
-            } else  {
-                console.log('PASSSS ALL LOGIN');
-                console.log(user);
-                let access_token = jwtToken ({
-                    id:user.id,
-                    email
-                })
-                
-                res.status(200).json({
-                    access_token 
-                })
-            }
+      console.log('masukkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkloginnnnnnnnnnnnnnnnnnnnnnnnnnn');
+      console.log(req.body);
+      let email = req.body.email
+      let password = req.body.password
+      User.findOne({where : {email : email}})
+      .then((user) => {
+          if (!user) {
+              throw {
+                  msg : 'wrong email / password',
+                  code : 401
+              }
+          } else if (!compare(req.body.password, user.password)) {
+              console.log(password, user.password);
+              throw {
+                  msg : 'wrong email / password',
+                  code : 401
+              }
+          } else  {
+              let access_token = jwtToken ({
+                  id:user.id,
+                  email
+              })
+              next()
+              res.status(200).json({
+                  access_token
+                  
+              })
+          }
         })
         .catch(err => {
             res.status(err.code).json({

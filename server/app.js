@@ -1,9 +1,11 @@
-require(`dotenv`).config();
+if(process.env.NODE_ENV === 'development'){
+    require(`dotenv`).config();
+}
 
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 const router = require('./routes/index')
 const errHandler = require('./middlewares/errHandler');
 
@@ -13,6 +15,6 @@ app.use(express.json());
 app.use(router);
 app.use(errHandler);
 
-app.listen(port, () => {
-    console.log(`indv project, working port:`, port);
+app.listen(PORT, () => {
+    console.log(`indv project, working port:`, PORT);
 })

@@ -5,7 +5,7 @@ const favoriteRouter = require('./favoriteRouter');
 
 router.get('/', (req, res) => {
     res.status(200).json({
-        message: `Individu project working`
+        message: `Individual project working`
     })
 })
 router.use('/favorites', favoriteRouter);
